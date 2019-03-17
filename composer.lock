@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96098e473b028cdb2529580554a1ae3e",
+    "content-hash": "4ff9ff521e343e0794468e89993c397a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -151,6 +151,59 @@
                 "parser"
             ],
             "time": "2018-03-08T01:11:30+00:00"
+        },
+        {
+            "name": "evercode1/trait-maker",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/evercode1/trait-maker.git",
+                "reference": "22636ad24439608a9dcd20ec20cd82a10cab0bbe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/evercode1/trait-maker/zipball/22636ad24439608a9dcd20ec20cd82a10cab0bbe",
+                "reference": "22636ad24439608a9dcd20ec20cd82a10cab0bbe",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1",
+                "php": "5.6.*|~7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Evercode1\\TraitMaker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bill Keck",
+                    "email": "ikon321@yahoo.com",
+                    "homepage": "https://github.com/evercode1",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Artisan Command To Create A Trait Stub",
+            "homepage": "https://github.com/evercode1/trait-maker",
+            "keywords": [
+                "Evercode1",
+                "Laravel 5.2",
+                "artisan",
+                "laravel",
+                "laravel traits",
+                "trait-maker"
+            ],
+            "time": "2016-04-06T02:34:14+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2025,6 +2078,50 @@
                 "environment"
             ],
             "time": "2019-01-29T11:11:52+00:00"
+        },
+        {
+            "name": "y-urbanevich/laravel-create-update-trait",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/y-urbanevich/laravel-create-update-trait.git",
+                "reference": "d4d42640c5e83e08e2ecc6f745a6ffa73749b80a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/y-urbanevich/laravel-create-update-trait/zipball/d4d42640c5e83e08e2ecc6f745a6ffa73749b80a",
+                "reference": "d4d42640c5e83e08e2ecc6f745a6ffa73749b80a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.4.*",
+                "php": ">=5.6.4"
+            },
+            "type": "laravel-trait",
+            "autoload": {
+                "psr-4": {
+                    "Urbanevich\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yaroslav Urbanevich",
+                    "email": "y.urbanevich@gmail.com",
+                    "homepage": "http://exe.kh.ua"
+                }
+            ],
+            "description": "Create/Update trait to Laravel 5.4 ",
+            "keywords": [
+                "create",
+                "laravel",
+                "trait",
+                "update"
+            ],
+            "time": "2017-03-17T11:34:09+00:00"
         }
     ],
     "packages-dev": [
@@ -3513,7 +3610,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "y-urbanevich/laravel-create-update-trait": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
