@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2019-03-19 10:00:00
+Date: 2019-03-19 10:59:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,10 +96,10 @@ CREATE TABLE `logistpanaderiaclientepropietarios` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaclientesresponsables`
+-- Table structure for `logistpanaderiaclienteresponsables`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaclientesresponsables`;
-CREATE TABLE `logistpanaderiaclientesresponsables` (
+DROP TABLE IF EXISTS `logistpanaderiaclienteresponsables`;
+CREATE TABLE `logistpanaderiaclienteresponsables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `cedula` double DEFAULT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE `logistpanaderiaclientesresponsables` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaclientesresponsables
+-- Records of logistpanaderiaclienteresponsables
 -- ----------------------------
 
 -- ----------------------------
@@ -360,10 +360,10 @@ CREATE TABLE `logistpanaderiasilo` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiasiloalamcen`
+-- Table structure for `logistpanaderiasiloalmacen`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiasiloalamcen`;
-CREATE TABLE `logistpanaderiasiloalamcen` (
+DROP TABLE IF EXISTS `logistpanaderiasiloalmacen`;
+CREATE TABLE `logistpanaderiasiloalmacen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_silo` varchar(255) DEFAULT NULL,
   `id_producto` varchar(255) DEFAULT NULL,
@@ -372,7 +372,7 @@ CREATE TABLE `logistpanaderiasiloalamcen` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiasiloalamcen
+-- Records of logistpanaderiasiloalmacen
 -- ----------------------------
 
 -- ----------------------------
