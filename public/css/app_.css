@@ -145,11 +145,19 @@ b, strong{
     color: white;
 }
 
+@media (max-width: 576px){
+    #div-imgLogin{
+        display: none;
+    }
+}
+
 @media (min-width: 576px){
     #div-imgLogin{
         width: 50%;
     }
 }
+
+
 
 .img-circle {
     border-radius: 0% !important;
