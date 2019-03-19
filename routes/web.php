@@ -12,9 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('clear-cache');
 });
 
+Route::get('/login', function(){    
+    return view('auth.login');
+});
+
+Route::get('/clear-cache', function() {
+    $exitCode = Cache::flush();
+    return redirect('login');   
+});
 
 Auth::routes();
 
