@@ -11,7 +11,7 @@ class logistpanaderiaciloalmacenincorporacion extends Model
                             'fecha',
                             'cantidad',
                             'nota',
-                            'id_cilo',
+                            'id_silo',
                             'id_producto',
     ];
 }

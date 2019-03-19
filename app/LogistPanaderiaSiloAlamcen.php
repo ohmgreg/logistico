@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class logistpanaderiaciloalamcen extends Model
+class LogistPanaderiaSiloAlamcen extends Model
 {
-    protected $table = 'logistpanaderiaciloalamcen';
+    protected $table = 'LogistPanaderiaSiloAlamcen';
     protected $fillable = [
-        'id_cilo',
+        'id_silo',
         'id_producto',
         'cantidad',
         'merma',

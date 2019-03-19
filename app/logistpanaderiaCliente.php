@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class logistpanaderiaCliente extends Model
+class LogistPanaderiaCliente extends Model
 {
     //
-    protected $table = 'logistpanaderiaCliente';
+    protected $table = 'LogistPanaderiaCliente';
     protected $fillable = [
                             'NombrePanaderia',
                             'rif',
