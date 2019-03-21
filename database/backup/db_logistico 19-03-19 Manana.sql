@@ -16,10 +16,10 @@ Date: 2019-03-19 10:59:36
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `logistpanaderiacliente`
+-- Table structure for `LogistPanaderiaCliente`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiacliente`;
-CREATE TABLE `logistpanaderiacliente` (
+DROP TABLE IF EXISTS `LogistPanaderiaCliente`;
+CREATE TABLE `LogistPanaderiaCliente` (
   `id` int(11) NOT NULL,
   `NombrePanaderia` varchar(255) DEFAULT NULL,
   `rif` varchar(255) DEFAULT NULL,
@@ -46,17 +46,17 @@ CREATE TABLE `logistpanaderiacliente` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiacliente
+-- Records of LogistPanaderiaCliente
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaclienteasignacion`
+-- Table structure for `LogistPanaderiaClienteAsignacion`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaclienteasignacion`;
-CREATE TABLE `logistpanaderiaclienteasignacion` (
+DROP TABLE IF EXISTS `LogistPanaderiaClienteAsignacion`;
+CREATE TABLE `LogistPanaderiaClienteAsignacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_producto` int(11) DEFAULT NULL,
-  `id_panaderia` int(11) DEFAULT NULL,
+  `id_Panaderia` int(11) DEFAULT NULL,
   `cantidad` float DEFAULT NULL,
   `ultimodespacho` date DEFAULT NULL,
   `activo` int(11) DEFAULT NULL,
@@ -64,18 +64,18 @@ CREATE TABLE `logistpanaderiaclienteasignacion` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaclienteasignacion
+-- Records of LogistPanaderiaClienteAsignacion
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaclientepropietarios`
+-- Table structure for `LogistPanaderiaClientePropietarios`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaclientepropietarios`;
-CREATE TABLE `logistpanaderiaclientepropietarios` (
+DROP TABLE IF EXISTS `LogistPanaderiaClientePropietarios`;
+CREATE TABLE `LogistPanaderiaClientePropietarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `cedula` double DEFAULT NULL,
-  `id_panaderia` int(11) DEFAULT NULL,
+  `id_Panaderia` int(11) DEFAULT NULL,
   `niveldeacciones` float DEFAULT NULL,
   `telefono_ppal` int(11) DEFAULT NULL,
   `correo` varchar(255) DEFAULT NULL,
@@ -92,20 +92,20 @@ CREATE TABLE `logistpanaderiaclientepropietarios` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaclientepropietarios
+-- Records of LogistPanaderiaClientePropietarios
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaclienteresponsables`
+-- Table structure for `LogistPanaderiaClienteResponsables`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaclienteresponsables`;
-CREATE TABLE `logistpanaderiaclienteresponsables` (
+DROP TABLE IF EXISTS `LogistPanaderiaClienteResponsables`;
+CREATE TABLE `LogistPanaderiaClienteResponsables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `cedula` double DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `telefono` double(11,0) DEFAULT NULL,
-  `id_panaderia` int(255) DEFAULT NULL,
+  `id_Panaderia` int(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
   `validaemail` int(255) DEFAULT NULL,
   `validacorreo` int(255) DEFAULT NULL,
@@ -117,33 +117,33 @@ CREATE TABLE `logistpanaderiaclienteresponsables` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaclienteresponsables
+-- Records of LogistPanaderiaClienteResponsables
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiadistribucionoferta`
+-- Table structure for `LogistPanaderiaDistribucionOferta`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiadistribucionoferta`;
-CREATE TABLE `logistpanaderiadistribucionoferta` (
+DROP TABLE IF EXISTS `LogistPanaderiaDistribucionOferta`;
+CREATE TABLE `LogistPanaderiaDistribucionOferta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ordendistribucion` int(11) DEFAULT NULL,
-  `id_distribuidora` int(11) DEFAULT NULL,
+  `id_OrdenDistribucion` int(11) DEFAULT NULL,
+  `id_Distribuidora` int(11) DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL,
   `cantidad` decimal(10,0) DEFAULT NULL,
   `fechadespacho` date DEFAULT NULL,
-  `id_ordentransporte` int(11) DEFAULT NULL,
+  `id_OrdenTransporte` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiadistribucionoferta
+-- Records of LogistPanaderiaDistribucionOferta
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiadistribucionorden`
+-- Table structure for `LogistPanaderiaDistribucionOrden`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiadistribucionorden`;
-CREATE TABLE `logistpanaderiadistribucionorden` (
+DROP TABLE IF EXISTS `LogistPanaderiaDistribucionOrden`;
+CREATE TABLE `LogistPanaderiaDistribucionOrden` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fechainicio` date DEFAULT NULL,
   `fechafin` date DEFAULT NULL,
@@ -153,14 +153,14 @@ CREATE TABLE `logistpanaderiadistribucionorden` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiadistribucionorden
+-- Records of LogistPanaderiaDistribucionOrden
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiadistribuidora`
+-- Table structure for `LogistPanaderiaDistribuidora`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiadistribuidora`;
-CREATE TABLE `logistpanaderiadistribuidora` (
+DROP TABLE IF EXISTS `LogistPanaderiaDistribuidora`;
+CREATE TABLE `LogistPanaderiaDistribuidora` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
@@ -171,37 +171,37 @@ CREATE TABLE `logistpanaderiadistribuidora` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiadistribuidora
+-- Records of LogistPanaderiaDistribuidora
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiadistribuidoraalmacen`
+-- Table structure for `LogistPanaderiaDistribuidoraAlmacen`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiadistribuidoraalmacen`;
-CREATE TABLE `logistpanaderiadistribuidoraalmacen` (
+DROP TABLE IF EXISTS `LogistPanaderiaDistribuidoraAlmacen`;
+CREATE TABLE `LogistPanaderiaDistribuidoraAlmacen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_producto` int(11) DEFAULT NULL,
   `preciocompra` decimal(10,0) DEFAULT NULL,
   `precioventa` decimal(10,0) DEFAULT NULL,
-  `id_ordendedistribucion` int(11) DEFAULT NULL,
+  `id_OrdendeDistribucion` int(11) DEFAULT NULL,
   `cantidad` decimal(10,0) DEFAULT NULL,
   `existencia` decimal(10,0) DEFAULT NULL,
-  `id_distribuidora` int(11) DEFAULT NULL,
+  `id_Distribuidora` int(11) DEFAULT NULL,
   `merma` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiadistribuidoraalmacen
+-- Records of LogistPanaderiaDistribuidoraAlmacen
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiadistribuidoraresponsable`
+-- Table structure for `LogistPanaderiaDistribuidoraResponsable`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiadistribuidoraresponsable`;
-CREATE TABLE `logistpanaderiadistribuidoraresponsable` (
+DROP TABLE IF EXISTS `LogistPanaderiaDistribuidoraResponsable`;
+CREATE TABLE `LogistPanaderiaDistribuidoraResponsable` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_distribuidora` int(11) DEFAULT NULL,
+  `id_Distribuidora` int(11) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `telefono` double DEFAULT NULL,
   `correo` varchar(255) DEFAULT NULL,
@@ -211,91 +211,91 @@ CREATE TABLE `logistpanaderiadistribuidoraresponsable` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiadistribuidoraresponsable
+-- Records of LogistPanaderiaDistribuidoraResponsable
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaordendistribucion`
+-- Table structure for `LogistPanaderiaOrdenDistribucion`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaordendistribucion`;
-CREATE TABLE `logistpanaderiaordendistribucion` (
+DROP TABLE IF EXISTS `LogistPanaderiaOrdenDistribucion`;
+CREATE TABLE `LogistPanaderiaOrdenDistribucion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_panadera` int(11) DEFAULT NULL,
-  `fechaasignacion` date DEFAULT NULL,
+  `fechaAsignacion` date DEFAULT NULL,
   `fechadespacho` date DEFAULT NULL,
   `nodeposito` varchar(255) DEFAULT NULL,
   `banco` varchar(255) DEFAULT NULL,
-  `cod_asignacion` varchar(255) DEFAULT NULL,
-  `id_ordentransporte` int(11) DEFAULT NULL,
+  `cod_Asignacion` varchar(255) DEFAULT NULL,
+  `id_OrdenTransporte` int(11) DEFAULT NULL,
   `peso` decimal(10,0) DEFAULT NULL,
-  `costodistribucion` decimal(10,0) DEFAULT NULL,
-  `precioventadistribucion` decimal(10,0) DEFAULT NULL,
+  `costoDistribucion` decimal(10,0) DEFAULT NULL,
+  `precioventaDistribucion` decimal(10,0) DEFAULT NULL,
   `completado` int(11) NOT NULL DEFAULT '0',
   `validasms` int(11) NOT NULL DEFAULT '0',
   `validaemail` int(11) NOT NULL DEFAULT '0',
-  `id_transporte` int(11) DEFAULT NULL,
+  `id_Transporte` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaordendistribucion
+-- Records of LogistPanaderiaOrdenDistribucion
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaordendistribuciondetalle`
+-- Table structure for `LogistPanaderiaOrdenDistribucionDetalle`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaordendistribuciondetalle`;
-CREATE TABLE `logistpanaderiaordendistribuciondetalle` (
+DROP TABLE IF EXISTS `LogistPanaderiaOrdenDistribucionDetalle`;
+CREATE TABLE `LogistPanaderiaOrdenDistribucionDetalle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_producto` int(11) DEFAULT NULL,
   `cantidad` decimal(10,0) DEFAULT NULL,
   `precio` decimal(10,0) DEFAULT NULL,
-  `cod_asignacion` varchar(255) DEFAULT NULL,
-  `id_ordendeopeaciones` int(11) DEFAULT NULL,
+  `cod_Asignacion` varchar(255) DEFAULT NULL,
+  `id_Ordendeopeaciones` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaordendistribuciondetalle
+-- Records of LogistPanaderiaOrdenDistribucionDetalle
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaordenoperaciones`
+-- Table structure for `LogistPanaderiaOrdenOperaciones`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaordenoperaciones`;
-CREATE TABLE `logistpanaderiaordenoperaciones` (
+DROP TABLE IF EXISTS `LogistPanaderiaOrdenOperaciones`;
+CREATE TABLE `LogistPanaderiaOrdenOperaciones` (
   `id` int(11) NOT NULL,
   `fechainicio` date DEFAULT NULL,
   `fechafin` date DEFAULT NULL,
   `codigo` varchar(255) DEFAULT NULL,
-  `id_ordendistribucion` int(11) DEFAULT NULL,
+  `id_OrdenDistribucion` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaordenoperaciones
+-- Records of LogistPanaderiaOrdenOperaciones
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaordenoperacionesasignaresponsables`
+-- Table structure for `LogistPanaderiaOrdenOperacionesasignaResponsables`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaordenoperacionesasignaresponsables`;
-CREATE TABLE `logistpanaderiaordenoperacionesasignaresponsables` (
+DROP TABLE IF EXISTS `LogistPanaderiaOrdenOperacionesasignaResponsables`;
+CREATE TABLE `LogistPanaderiaOrdenOperacionesasignaResponsables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_ordenoperaciones` int(11) DEFAULT NULL,
-  `id_responsable` int(11) DEFAULT NULL,
+  `id_OrdenOperaciones` int(11) DEFAULT NULL,
+  `id_Responsable` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaordenoperacionesasignaresponsables
+-- Records of LogistPanaderiaOrdenOperacionesasignaResponsables
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaordenoperacionesresponsables`
+-- Table structure for `LogistPanaderiaOrdenOperacionesResponsables`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaordenoperacionesresponsables`;
-CREATE TABLE `logistpanaderiaordenoperacionesresponsables` (
+DROP TABLE IF EXISTS `LogistPanaderiaOrdenOperacionesResponsables`;
+CREATE TABLE `LogistPanaderiaOrdenOperacionesResponsables` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `telefono` double(11,0) DEFAULT NULL,
@@ -308,14 +308,14 @@ CREATE TABLE `logistpanaderiaordenoperacionesresponsables` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaordenoperacionesresponsables
+-- Records of LogistPanaderiaOrdenOperacionesResponsables
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiapresentacionesdeproductos`
+-- Table structure for `LogistPanaderiaPresentacionesdeProductos`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiapresentacionesdeproductos`;
-CREATE TABLE `logistpanaderiapresentacionesdeproductos` (
+DROP TABLE IF EXISTS `LogistPanaderiaPresentacionesdeProductos`;
+CREATE TABLE `LogistPanaderiaPresentacionesdeProductos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `presentacion` varchar(255) DEFAULT NULL,
   `observacion` varchar(255) DEFAULT NULL,
@@ -323,14 +323,14 @@ CREATE TABLE `logistpanaderiapresentacionesdeproductos` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiapresentacionesdeproductos
+-- Records of LogistPanaderiaPresentacionesdeProductos
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiaproductos`
+-- Table structure for `LogistPanaderiaProductos`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiaproductos`;
-CREATE TABLE `logistpanaderiaproductos` (
+DROP TABLE IF EXISTS `LogistPanaderiaProductos`;
+CREATE TABLE `LogistPanaderiaProductos` (
   `id` int(11) NOT NULL,
   `nombre` int(11) DEFAULT NULL,
   `peso` decimal(10,0) DEFAULT NULL,
@@ -339,14 +339,14 @@ CREATE TABLE `logistpanaderiaproductos` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiaproductos
+-- Records of LogistPanaderiaProductos
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiasilo`
+-- Table structure for `LogistPanaderiaSilo`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiasilo`;
-CREATE TABLE `logistpanaderiasilo` (
+DROP TABLE IF EXISTS `LogistPanaderiaSilo`;
+CREATE TABLE `LogistPanaderiaSilo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
@@ -356,49 +356,49 @@ CREATE TABLE `logistpanaderiasilo` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiasilo
+-- Records of LogistPanaderiaSilo
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiasiloalmacen`
+-- Table structure for `LogistPanaderiaSiloAlmacen`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiasiloalmacen`;
-CREATE TABLE `logistpanaderiasiloalmacen` (
+DROP TABLE IF EXISTS `LogistPanaderiaSiloAlmacen`;
+CREATE TABLE `LogistPanaderiaSiloAlmacen` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_silo` varchar(255) DEFAULT NULL,
+  `id_Silo` varchar(255) DEFAULT NULL,
   `id_producto` varchar(255) DEFAULT NULL,
   `cantidad` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiasiloalmacen
+-- Records of LogistPanaderiaSiloAlmacen
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiasiloalmacenincorporacion`
+-- Table structure for `LogistPanaderiaSiloAlmacenIncorporacion`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiasiloalmacenincorporacion`;
-CREATE TABLE `logistpanaderiasiloalmacenincorporacion` (
+DROP TABLE IF EXISTS `LogistPanaderiaSiloAlmacenIncorporacion`;
+CREATE TABLE `LogistPanaderiaSiloAlmacenIncorporacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
   `cantidad` float DEFAULT NULL,
   `nota` varchar(255) DEFAULT NULL,
-  `id_silo` int(11) DEFAULT NULL,
+  `id_Silo` int(11) DEFAULT NULL,
   `merma` float DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiasiloalmacenincorporacion
+-- Records of LogistPanaderiaSiloAlmacenIncorporacion
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiasiloresponsables`
+-- Table structure for `LogistPanaderiaSiloResponsables`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiasiloresponsables`;
-CREATE TABLE `logistpanaderiasiloresponsables` (
+DROP TABLE IF EXISTS `LogistPanaderiaSiloResponsables`;
+CREATE TABLE `LogistPanaderiaSiloResponsables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `activo` int(11) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -410,14 +410,14 @@ CREATE TABLE `logistpanaderiasiloresponsables` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiasiloresponsables
+-- Records of LogistPanaderiaSiloResponsables
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiatransporte`
+-- Table structure for `LogistPanaderiaTransporte`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiatransporte`;
-CREATE TABLE `logistpanaderiatransporte` (
+DROP TABLE IF EXISTS `LogistPanaderiaTransporte`;
+CREATE TABLE `LogistPanaderiaTransporte` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehiculo` varchar(255) DEFAULT NULL,
   `marca` varchar(255) DEFAULT NULL,
@@ -427,14 +427,14 @@ CREATE TABLE `logistpanaderiatransporte` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiatransporte
+-- Records of LogistPanaderiaTransporte
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiatransporteconductores`
+-- Table structure for `LogistPanaderiaTransporteConductores`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiatransporteconductores`;
-CREATE TABLE `logistpanaderiatransporteconductores` (
+DROP TABLE IF EXISTS `LogistPanaderiaTransporteConductores`;
+CREATE TABLE `LogistPanaderiaTransporteConductores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cedula` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -445,24 +445,24 @@ CREATE TABLE `logistpanaderiatransporteconductores` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiatransporteconductores
+-- Records of LogistPanaderiaTransporteConductores
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `logistpanaderiatransporteorden`
+-- Table structure for `LogistPanaderiaTransporteOrden`
 -- ----------------------------
-DROP TABLE IF EXISTS `logistpanaderiatransporteorden`;
-CREATE TABLE `logistpanaderiatransporteorden` (
+DROP TABLE IF EXISTS `LogistPanaderiaTransporteOrden`;
+CREATE TABLE `LogistPanaderiaTransporteOrden` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_vehiculo` int(11) DEFAULT NULL,
   `id_conductor` int(11) DEFAULT NULL,
-  `cod_transporte` varchar(255) DEFAULT NULL,
-  `tipo_transporte` varchar(11) DEFAULT NULL,
+  `cod_Transporte` varchar(255) DEFAULT NULL,
+  `tipo_Transporte` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of logistpanaderiatransporteorden
+-- Records of LogistPanaderiaTransporteOrden
 -- ----------------------------
 
 -- ----------------------------
