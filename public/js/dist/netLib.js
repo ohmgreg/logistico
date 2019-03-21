@@ -223,7 +223,7 @@ NetLib.loadScript = loadScript = function(scrip){
 	var s = document.createElement("script");
 	var swUrl = scrip.match(/^(http|https|ftp)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/gi) ? true : false;	
 	s.type = "text/javascript";
-	s.src = swUrl ? scrip : wdw.jsDir + scrip + getRandom();
+	s.src = swUrl ? scrip : scrip + getRandom();
 	document.body.appendChild(s);
 }
 

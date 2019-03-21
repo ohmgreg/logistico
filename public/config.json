@@ -10,47 +10,29 @@
 		"dist/dataTables.bootstrap.min.js",
 		"dist/dataTables.buttons.min.js",
 		"dist/buttons.flash.min.js",
-		"dist/bootstrap-notify.min.js",	
+		"dist/bootstrap-notify.min.js",
+		"dist/bootstrap-datepicker.js",
+		"dist/locales/bootstrap-datepicker.es.min.js",
 		"dist/jquery.inputmask.js",
 		"dist/jquery.inputmask.bundle.min.js",
 		"dist/jquery.inputmask.date.extensions.js",
 		"dist/jquery.inputmask.extensions.js",
-		"dist/adminlte.min.js",
+		"dist/adminlte.js",
 		"dist/netLib.js",
 		"dist/NetFunctions.js"
 	],
 	"jsAdmin":[
 		"dist/chart2.8.0.js",
-		"jsAdmin/main.js"		
+		"jsAdmin/Init.js"		
 	],
-	"jsPerfil":[
-		"jsPerfil/Init.js"
-	],
-	"jsUbch":[
-		"jsUbch/main.js"
-	],
-	"jsComunidad":[		
-		"jsComunidad/mainInsert.js",
-		"jsComunidad/mainUpdate.js",
-		"jsComunidad/Init.js"
-	],
-	"jsCalle":[		
-		"jsCalle/mainInsert.js",
-		"jsCalle/mainUpdate.js",
-		"jsCalle/Init.js"
-	],
-	"jsLogin":[		
-
-	],
-	"jsFamilia":[		
-		"jsFamilia/mainInsert.js",
-		"jsFamilia/mainUpdate.js",
-		"jsFamilia/Init.js"
+	"jsSilos":[		
+		"jsSilos/Init.js"
 	],
 	"cssComun": [
 		"app_.css",
 		"netInit.min.css",
 		"bootstrap.min.css",
+		"bootstrap-datepicker.min.css",
 		"font-awesome.min.css",
 		"ionicons.min.css",
 		"adminlte.min.css",

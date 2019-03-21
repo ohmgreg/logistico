@@ -23,6 +23,19 @@ window.lenguaje_espanol = {
     }
 };
 
+window.dateES = {
+    days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
+    daysShort:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+    daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
+    months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+    monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    today:"Hoy",
+    monthsTitle:"Meses",
+    clear:"Borrar",
+    weekStart:1,
+    format:"dd/mm/yyyy"
+}
+
 window.loadSelect = function(url, idSelect, optValue, optText, idSearch, swGrid, idSearch1){
     var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';
     var elem = document.getElementById(idSelect);

@@ -19,11 +19,16 @@ Route::get('/login', function(){
     return view('auth.login');
 });
 
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function(){
     $exitCode = Cache::flush();
     return redirect('login');   
 });
 
-Auth::routes();
+Route::get('/SilosRecarga', function(){    
+    return view('silos.SilosRecarga');
+});
 
+
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
