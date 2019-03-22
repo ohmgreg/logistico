@@ -8,7 +8,7 @@ use App\LogistPanaderiaClientePropietarios;
 use App\LogistPanaderiaClienteResponsables;
 use Illuminate\Queue\Console\RetryCommand;
 
-
+// prueba
 trait clienteTraits
 {
 
