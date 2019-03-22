@@ -15,6 +15,6 @@ class SiloController extends Controller
 
 
     public function listilos(){
-        $this->ListSilo();
+       return $this->ListSilo();
     }
 }

@@ -14,6 +14,7 @@ trait SiloTraits
     {
 
         return LogistPanaderiaSilo::all();
+
     }
 
     public function ShowSilo($data)

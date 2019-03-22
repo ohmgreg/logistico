@@ -33,5 +33,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-route::post('ListSilo','SiloController@listilos');
+route::get('ListSilo','SiloController@listilos');
 
