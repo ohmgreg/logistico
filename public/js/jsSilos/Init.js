@@ -1,11 +1,8 @@
 N(".preload").nodeRemove(function(){
 	N(".wrapper").show(function(){
-		$('#aTree').click(function(){
-			var ulMenu = $(this).parent().children('ul').get(0)
-			$(ulMenu).slideToggle("slow");
-		})
-		loadSilos("cmb-silo");
-		loadProductos("cmb-producto");
-		Insert();
+		$('.datepicker').datepicker({language: 'es'});
+		LoadFunctions._listSilo("cmb-silo");
+		LoadFunctions._listproducts("cmb-producto");
+		N(".OnlyNum").OnlyNum();
 	}, 200)
 }, 200);

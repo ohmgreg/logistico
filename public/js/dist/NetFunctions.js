@@ -1,71 +1,72 @@
-window.lenguaje_espanol = {
-    "decimal": "",
-    "emptyTable": "No hay datos disponibles en la tabla",
-    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-    "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-    "infoFiltered": "(Filtrado de _MAX_ entradas totales)",
-    "infoPostFix": "",
-    "thousands": ",",
-    "lengthMenu": "Mostrar _MENU_ entradas",
-    "loadingRecords": "Cargando...",
-    "processing": "Procesando...",
-    "search": "Buscar:",
-    "zeroRecords": "No se encontraron registros coincidentes",
-    "paginate": {
-        "first": "Primero",
-        "last": "Último",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    },
-    "aria": {
-        "sortAscending": ": Activar para ordenar la columna ascendente",
-        "sortDescending": ": activate to sort column descending"
+;(function(win){
+    win.Logist = {};
+    win.lenguaje_espanol = {
+        "decimal": "",
+        "emptyTable": "No hay datos disponibles en la tabla",
+        "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+        "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+        "infoFiltered": "(Filtrado de _MAX_ entradas totales)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "No se encontraron registros coincidentes",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+        "aria": {
+            "sortAscending": ": Activar para ordenar la columna ascendente",
+            "sortDescending": ": activate to sort column descending"
+        }
+    };
+
+    win.Notify = function(a, b, c){
+        var time = c == undefined ? 300 : c;
+        window.NotifyEvents = $.notify({message: a},{placement: {align: "center"}, z_index: 100000, delay: time, animate: {enter: 'animated fadeInDown', exit: 'animated fadeOutUp'}, type: b });
+    };
+
+    win.Ajax = function(route, data, funct, c){
+        if(c){Notify("PROCESANDO INFORMACION ESPERE POR FAVOR...", "info");}        
+        $.ajax({
+            url: route,
+            headers: {
+                'X-CSRF-TOKEN': getToken()
+            },
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            success: function(resp) {
+                if(c){Notify("LA INFORMACION FUE AGREGADA CON EXITO.", "info");}
+                funct(resp);
+            }
+        });       
+    }  
+
+    win.isNull = function(check){
+        return check == null ? true : false        
     }
-};
 
-$('.datepicker').datepicker({language: 'es'})
+    win.defineDataTable = function(a, b){
+        var elem = document.querySelector("#" + a);
+        var elemTbody = document.querySelector("#" + a + " tbody");
+        $(elem).dataTable().fnDestroy();
+        $(elemTbody).html(b);
+        $(elem).DataTable({
+            "destroy": true,
+            "language": lenguaje_espanol
+        });
+    }
 
-window.loadSilos = function(idSelect){
-    var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';
-    var elem = document.getElementById(idSelect);
-    $.ajax({
-        url: "_listSilo",
-        headers: {
-            'X-CSRF-TOKEN': getToken()
-        },
-        type: 'post',
-        dataType: 'json',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                str_opcion += '<option value ="' + data[i]["id"] + '">' + data[i]["nombre"] + "</option>";
-            }
-            $(".table tbody").empty();
-            $(elem).empty();
-            $(elem).html(str_opcion); 
-        }
-    });
-}
 
-window.loadProductos = function(idSelect){
-    var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';
-    var elem = document.getElementById(idSelect);
-    $.ajax({
-        url: "_listproducts",
-        headers: {
-            'X-CSRF-TOKEN': getToken()
-        },
-        type: 'post',
-        dataType: 'json',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                str_opcion += '<option value ="' + data[i]["id"] + '">' + data[i]["nombre"] + "</option>";
-            }
-            $(".table tbody").empty();
-            $(elem).empty();
-            $(elem).html(str_opcion); 
-        }
-    });
-}
+
+
+
+
 
 
 
@@ -215,10 +216,7 @@ window.getToken = function(){
     return resp;
 };
 
-window.Notify = function(a, b, c){
-    var time = c == undefined ? 500 : c;
-	window.NotifyEvents = $.notify({message: a},{ z_index: 100000, delay: time, animate: {enter: 'animated fadeInDown', exit: 'animated fadeOutUp'}, type: b });
-};
+
 
 window.AddUser = function(a, Route, b){
     $.ajax({
@@ -611,3 +609,5 @@ window.chartValores = function(a, b){
     }
     window.myLine = new Chart(salesChartCanvas, config);
   }
+
+})(window);

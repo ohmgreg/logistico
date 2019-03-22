@@ -26,7 +26,8 @@
 		"jsAdmin/Init.js"		
 	],
 	"jsSilos":[
-		"jsSilos/Insert.js",
+		"jsSilos/Functions.js",
+		"jsSilos/Events.js",		
 		"jsSilos/Init.js"
 	],
 	"cssComun": [

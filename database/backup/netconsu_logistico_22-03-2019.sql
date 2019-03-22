@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50724
 File Encoding         : 65001
 
-Date: 2019-03-22 02:06:05
+Date: 2019-03-22 17:52:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -380,7 +380,7 @@ CREATE TABLE `logistpanaderiasiloalmacen` (
 -- ----------------------------
 -- Records of logistpanaderiasiloalmacen
 -- ----------------------------
-INSERT INTO `logistpanaderiasiloalmacen` VALUES ('1', '1', '1', '10000', '2019-03-22 06:24:19', '2019-03-22 06:24:19');
+INSERT INTO `logistpanaderiasiloalmacen` VALUES ('1', '1', '1', '519490', '2019-03-22 20:51:45', '2019-03-22 06:24:19');
 
 -- ----------------------------
 -- Table structure for `logistpanaderiasiloalmacenincorporacion`
@@ -388,23 +388,24 @@ INSERT INTO `logistpanaderiasiloalmacen` VALUES ('1', '1', '1', '10000', '2019-0
 DROP TABLE IF EXISTS `logistpanaderiasiloalmacenincorporacion`;
 CREATE TABLE `logistpanaderiasiloalmacenincorporacion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` varchar(11) DEFAULT NULL,
-  `cantidad` float DEFAULT NULL,
-  `nota` varchar(255) DEFAULT NULL,
-  `merma` float DEFAULT NULL,
+  `cod_recarga` varchar(255) DEFAULT NULL,
   `id_Silo` int(11) DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `fecha` varchar(11) DEFAULT NULL,
+  `cantidad` float DEFAULT NULL,
+  `merma` float DEFAULT NULL,
+  `nota` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of logistpanaderiasiloalmacenincorporacion
 -- ----------------------------
-INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('14', '29/03/2019', '10000', 'aa', null, '1', '1', '2019-03-22 06:22:31', '2019-03-22 06:22:31');
-INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('15', '29/03/2019', '10000', 'aa', null, '1', '1', '2019-03-22 06:22:49', '2019-03-22 06:22:49');
-INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('16', '29/03/2019', '10000', 'aa', null, '1', '1', '2019-03-22 06:24:19', '2019-03-22 06:24:19');
+INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('21', null, '1', '1', '14/03/2019', '500000', '10', 'gt', '2019-03-22 19:44:25', '2019-03-22 20:47:01');
+INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('22', null, '1', '1', '15/03/2019', '10000', null, null, '2019-03-22 20:51:44', '2019-03-22 20:51:44');
+INSERT INTO `logistpanaderiasiloalmacenincorporacion` VALUES ('20', null, '1', '1', '25/03/2019', '10000', '200', 'prueba 1', '2019-03-22 19:24:09', '2019-03-22 19:44:01');
 
 -- ----------------------------
 -- Table structure for `logistpanaderiasiloresponsables`

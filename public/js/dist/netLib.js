@@ -62,6 +62,20 @@ var prot = {
 	addEvent: function(eventName, fn){
 		addEvento(this, eventName, fn);
 	},
+	OnlyNum: function(){
+		var fn = function(e){
+			var key = window.event ? window.event.key : e.key;
+
+			var ExpBack = /^[\b]$/.test(key);
+
+			console.log(ExpBack);
+			if(/^[0-9]$/.test(key) || key == "backspace"){
+				e["srcElement"]["value"] += key;
+			}
+			
+		}
+		addEvento(this, "keydown", fn);
+	},
 	click: function(fn){
 		if(fn == undefined){
 			var evt = document.createEvent("MouseEvents");

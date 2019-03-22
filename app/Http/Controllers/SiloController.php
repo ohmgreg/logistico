@@ -19,8 +19,15 @@ class SiloController extends Controller
         return $this->AddProductSilo($data);
     }
 
+    public function _listSiloRecarga(Request $data){
+        return $this->listSiloRecarga($data);
+    }
+
     public function _updateMerma(Request $data){
         return $this->updateMerma($data);
     }
 
+    public function _ShowMerma(Request $data){
+        return $this->ShowMerma($data);
+    }
 }

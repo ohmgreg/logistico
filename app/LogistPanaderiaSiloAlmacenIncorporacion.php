@@ -8,10 +8,12 @@ class LogistPanaderiaSiloAlmacenIncorporacion extends Model
 {
     protected $table = 'LogistPanaderiaSiloAlmacenIncorporacion';
     protected $fillable = [
-                            'fecha',
-                            'cantidad',
-                            'nota',
+                            'cod_recarga',
                             'id_Silo',
                             'id_producto',
+                            'fecha',
+                            'cantidad',
+                            'merma',
+                            'nota'
     ];
 }

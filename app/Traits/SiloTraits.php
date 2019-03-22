@@ -16,9 +16,19 @@ trait SiloTraits
 
     }
 
+    public function listSiloRecarga($data)
+    {   
+        return LogistPanaderiaSiloAlmacenIncorporacion::where('id_Silo', $data->id_Silo)->get();
+    }
+
     public function ShowSilo($data)
     {
         return LogistPanaderiaSilo::where('id', $data->id)->get();
+    }
+
+    public function ShowMerma($data)
+    {
+        return LogistPanaderiaSiloAlmacenIncorporacion::where('id', $data->id_incorporacion)->get();
     }
 
     public function AddProductSilo($data)
@@ -32,7 +42,7 @@ trait SiloTraits
         ]);
 
         $ExistProduct = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->count();
-        if ($ExistProduct == 1) {
+        if ($ExistProduct !== 0) {
             $id_LogistPanaderiaSiloAlmacen = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
             $ExistenciaProducto = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
             $ExistenciaProducto = $ExistenciaProducto + $data['cantidad'];
