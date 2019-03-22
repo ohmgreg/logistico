@@ -10,14 +10,17 @@ use App\Traits\SiloTraits;
 class SiloController extends Controller
 {
     use SiloTraits;
-<<<<<<< HEAD
-    public function List_Silo(){
+
+    public function _listSilo(){
         return $this->listSilo();
-=======
-
-
-    public function listilos(){
-       return $this->ListSilo();
->>>>>>> 265e24607fa604652ce55547fc95015ff099098c
     }
+
+    public function _AddProductSilo(Request $data){
+        return $this->AddProductSilo($data);
+    }
+
+    public function _updateMerma(Request $data){
+        return $this->updateMerma($data);
+    }
+
 }

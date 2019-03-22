@@ -27,7 +27,7 @@ trait SiloTraits
             'fecha' => $data['fecha'],
             'cantidad' => $data['cantidad'],
             'nota' => $data['nota'],
-            'id_Silo' => $data['nota'],
+            'id_Silo' => $data['id_Silo'],
             'id_producto' => $data['id_producto'],
         ]);
 

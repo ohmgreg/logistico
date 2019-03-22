@@ -14,32 +14,32 @@
 Route::get('/', function () {
     return redirect('clear-cache');
 });
-
 Route::get('/login', function(){    
     return view('auth.login');
 });
-
 Route::get('/clear-cache', function(){
     $exitCode = Cache::flush();
     return redirect('login');   
 });
-
 Route::get('/SilosRecarga', function(){    
     return view('silos.SilosRecarga');
 });
-
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-<<<<<<< HEAD
-route::post('List_Silo','SiloController@List_Silo');
-=======
-route::get('ListSilo','SiloController@listilos');
->>>>>>> 265e24607fa604652ce55547fc95015ff099098c
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+route::post('_AddProductSilo','SiloController@_AddProductSilo');
+route::post('_listSilo','SiloController@_listSilo');
+
+
+
+
+
+route::post('List_Producto','ProductoController@List_Producto');
+
+
