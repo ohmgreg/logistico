@@ -12,9 +12,10 @@
                         <input class="form-control input-sm ctrUpdate" type="text" placeholder="INGRESE LAS CANTIDADES EN TONELADAS" id=txt_SiloCantidadRecarga >
                     </div>
                 </div>
-                <div class="form-group">
+                <input type="text" value="{{ csrf_token() }}" width="400px">
+                <div class="form-group">                        
                         <label>FECHA DE LA RECARGA:</label>
-                        <div class="input-group">
+                        <div class="input-group">                                
                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                             <input class="form-control input-sm datepicker ctrUpdate" type="text" placeholder="" id=txt_SiloFechaRecarga readonly>
                         </div>
