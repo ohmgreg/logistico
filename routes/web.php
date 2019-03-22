@@ -40,6 +40,6 @@ route::post('_listSilo','SiloController@_listSilo');
 
 
 
-route::post('List_Producto','ProductoController@List_Producto');
+route::post('_listproducts','ProductoController@_listproducts');
 
 

@@ -25,23 +25,65 @@ window.lenguaje_espanol = {
 
 $('.datepicker').datepicker({language: 'es'})
 
-$('#aTree').click(function(){
-    var ulMenu = $(this).parent().children('ul').get(0)
-    $(ulMenu).slideToggle("slow");
-})
-
-window.dateES = {
-    days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
-    daysShort:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
-    daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],
-    months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
-    monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
-    today:"Hoy",
-    monthsTitle:"Meses",
-    clear:"Borrar",
-    weekStart:1,
-    format:"dd/mm/yyyy"
+window.loadSilos = function(idSelect){
+    var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';
+    var elem = document.getElementById(idSelect);
+    $.ajax({
+        url: "_listSilo",
+        headers: {
+            'X-CSRF-TOKEN': getToken()
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                str_opcion += '<option value ="' + data[i]["id"] + '">' + data[i]["nombre"] + "</option>";
+            }
+            $(".table tbody").empty();
+            $(elem).empty();
+            $(elem).html(str_opcion); 
+        }
+    });
 }
+
+window.loadProductos = function(idSelect){
+    var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';
+    var elem = document.getElementById(idSelect);
+    $.ajax({
+        url: "_listproducts",
+        headers: {
+            'X-CSRF-TOKEN': getToken()
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                str_opcion += '<option value ="' + data[i]["id"] + '">' + data[i]["nombre"] + "</option>";
+            }
+            $(".table tbody").empty();
+            $(elem).empty();
+            $(elem).html(str_opcion); 
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 window.loadSelect = function(url, idSelect, optValue, optText, idSearch, swGrid, idSearch1){
     var str_opcion = '<option value="" disabled selected>SELECCIONE UN OPCIÓN</option>';

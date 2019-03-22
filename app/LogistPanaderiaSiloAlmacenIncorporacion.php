@@ -11,7 +11,7 @@ class LogistPanaderiaSiloAlmacenIncorporacion extends Model
                             'fecha',
                             'cantidad',
                             'nota',
-                            'id_silo',
+                            'id_Silo',
                             'id_producto',
     ];
 }

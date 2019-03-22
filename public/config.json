@@ -25,7 +25,8 @@
 		"dist/chart2.8.0.js",
 		"jsAdmin/Init.js"		
 	],
-	"jsSilos":[		
+	"jsSilos":[
+		"jsSilos/Insert.js",
 		"jsSilos/Init.js"
 	],
 	"cssComun": [

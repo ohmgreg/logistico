@@ -8,7 +8,7 @@ class LogistPanaderiaSiloAlmacen extends Model
 {
     protected $table = 'LogistPanaderiaSiloAlmacen';
     protected $fillable = [
-                            'id_silo',
+                            'id_Silo',
                             'id_producto',
                             'cantidad',
                             'merma'

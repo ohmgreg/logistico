@@ -4,7 +4,7 @@ namespace App\traits;
 
 use DB;
 use App\LogistPanaderiaSilo;
-use App\LogistPanaderiaSiloAlamcen;
+use App\LogistPanaderiaSiloAlmacen;
 use App\LogistPanaderiaSiloAlmacenIncorporacion;
 
 trait SiloTraits
@@ -31,21 +31,20 @@ trait SiloTraits
             'id_producto' => $data['id_producto'],
         ]);
 
-        $ExistProduct = LogistPanaderiaSiloAlamcen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->count()->get();
-
-        if ($ExistProduct = 1) {
-            $id_LogistPanaderiaSiloAlamcen = LogistPanaderiaSiloAlamcen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
+        $ExistProduct = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->count();
+        if ($ExistProduct == 1) {
+            $id_LogistPanaderiaSiloAlmacen = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
             $ExistenciaProducto = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
             $ExistenciaProducto = $ExistenciaProducto + $data['cantidad'];
-            return LogistPanaderiaSiloAlmacen::where('id', $id_LogistPanaderiaSiloAlamcen)
+            return LogistPanaderiaSiloAlmacen::where('id', $id_LogistPanaderiaSiloAlmacen)
                 ->update([
                     'cantidad' => $ExistenciaProducto,
                 ]);
         } else {
-            return LogistPanaderiaSiloAlamcen::create([
+            return LogistPanaderiaSiloAlmacen::create([
                 'id_Silo' => $data['id_Silo'],
                 'id_producto' => $data['id_producto'],
-                'cantidad' =>  $data['cantidad'],
+                'cantidad' =>  $data['cantidad']
             ]);
         }
     }
@@ -56,10 +55,10 @@ trait SiloTraits
         ->update([
                 'merma'=>$data['merma']
         ]);
-        $id_LogistPanaderiaSiloAlamcen = LogistPanaderiaSiloAlamcen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
-        $ExistenciaProducto = LogistPanaderiaSiloAlamcen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
+        $id_LogistPanaderiaSiloAlmacen = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
+        $ExistenciaProducto = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
         $ExistenciaProducto = $ExistenciaProducto - $data['merma'];
-        return LogistPanaderiaSiloAlamcen::where('id', $id_LogistPanaderiaSiloAlamcen)
+        return LogistPanaderiaSiloAlmacen::where('id', $id_LogistPanaderiaSiloAlmacen)
         ->update([
             'cantidad' => $ExistenciaProducto,
         ]);
