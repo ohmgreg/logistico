@@ -33,7 +33,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+<<<<<<< HEAD
 route::post('List_Silo','SiloController@List_Silo');
+=======
+route::get('ListSilo','SiloController@listilos');
+>>>>>>> 265e24607fa604652ce55547fc95015ff099098c
 
 
 Auth::routes();

@@ -13,6 +13,7 @@ trait SiloTraits
     public function listSilo()
     {
         return LogistPanaderiaSilo::all();
+
     }
 
     public function ShowSilo($data)
