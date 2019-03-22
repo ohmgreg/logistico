@@ -1,7 +1,10 @@
 @extends('layouts.desktop')
 
-@section('content')
 
+
+
+@section('content')
+<input type="text" name="_token" value="<?php echo csrf_token(); ?>">
 @endsection
 
 @section('script')
