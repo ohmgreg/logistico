@@ -11,6 +11,6 @@ class LogistPanaderiaSilo extends Model
                             'nombre',
                             'direccion',
                             'telefono',
-                            'correo',
+                            'correo'
     ];
 }

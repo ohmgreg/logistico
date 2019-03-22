@@ -10,9 +10,8 @@ use App\LogistPanaderiaSiloAlmacenIncorporacion;
 trait SiloTraits
 {
 
-    public function ListSilo()
+    public function listSilo()
     {
-
         return LogistPanaderiaSilo::all();
     }
 

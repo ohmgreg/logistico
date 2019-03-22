@@ -3,6 +3,6 @@ N(".preload").nodeRemove(function(){
 		$('#aTree').click(function(){
 			var ulMenu = $(this).parent().children('ul').get(0)
 			$(ulMenu).slideToggle("slow");
-		})	
+		})
 	}, 200)
 }, 200);
