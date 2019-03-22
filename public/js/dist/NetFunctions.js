@@ -23,6 +23,13 @@ window.lenguaje_espanol = {
     }
 };
 
+$('.datepicker').datepicker({language: 'es'})
+
+$('#aTree').click(function(){
+    var ulMenu = $(this).parent().children('ul').get(0)
+    $(ulMenu).slideToggle("slow");
+})
+
 window.dateES = {
     days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],
     daysShort:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],

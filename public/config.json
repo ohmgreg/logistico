@@ -12,7 +12,7 @@
 		"dist/buttons.flash.min.js",
 		"dist/bootstrap-notify.min.js",
 		"dist/bootstrap-datepicker.js",
-		"dist/locales/bootstrap-datepicker.es.min.js",
+		"dist/locales/bootstrap-datepicker.es.min.js?ver=1.0",
 		"dist/jquery.inputmask.js",
 		"dist/jquery.inputmask.bundle.min.js",
 		"dist/jquery.inputmask.date.extensions.js",
