@@ -32,3 +32,6 @@ Route::get('/SilosRecarga', function(){
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+route::post('ListSilo','SiloController@listilos');
+
