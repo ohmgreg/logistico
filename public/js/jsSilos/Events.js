@@ -4,8 +4,8 @@
         $(ulMenu).slideToggle("slow");
     })
 
-	$(".modal").on("hidden.bs.modal", function(){
-		$('.ctrUpdate').val(''); 
+    $('.datepicker').on('changeDate', function(ev){
+        $(this).datepicker('hide');
     });
 
     $("#tableSilosRecarga").on("click", "#btn_merma", function(){
@@ -13,15 +13,30 @@
         LoadFunctions._ShowMerma(LoadVars)
     });
 
+    $("#tableSilosRecarga").on("click", "#btn_manufactura", function(){
+        LoadVars.id_incorporacion = $(this)[0].firstChild.id;
+        var fila = $(this).closest('tr').index();
+        LoadVars.cantidad = $('#tableSilosRecarga tbody').find('tr').eq(fila).find('td').eq(4).text() * 1000;
+        LoadFunctions._ShowManufactura(LoadVars)
+    });
+
     N("#btnMermaAdd").click(function(){
         if(checkInput(N("#txt_SiloMerma").val(), "DEBE INGRESAR UNA MERMA.", "danger")){return};
-        LoadVars.merma < LoadVars.cantidad ? LoadFunctions._updateMerma(LoadVars) : Notify("LA MERMA NO DEBE SER MAYOR QUE LA CANTIDAD RECARGADA.", "danger");        
+        if(checkNum(N("#txt_SiloMerma").val(), "LA CANTIDAD DEBE SER UN VALOR NUMERICO.", "danger")){return};
+        LoadVars.merma <= LoadVars.cantidad ? LoadFunctions._updateMerma(LoadVars) : Notify("LA MERMA NO DEBE SER MAYOR QUE LA CANTIDAD RECARGADA.", "danger");        
+    });
+
+    N("#btnManufacturaAdd").click(function(){
+        if(checkInput(N("#txt_SiloManufactura").val(), "DEBE INGRESAR UNA CANTIDAD MANUFACTURADA.", "danger")){return};
+        if(checkNum(N("#txt_SiloManufactura").val(), "LA CANTIDAD DEBE SER UN VALOR NUMERICO.", "danger")){return};
+        LoadVars.manufactura <=  Math.round(LoadVars.cantidad / 50) ? LoadFunctions._updateManufactura(LoadVars) : Notify("EL NUMERO DE SACOS SUPERA LA CANTIDAD ASIGNADA.", "danger");        
     });
 
     N("#btnSilosReload").click(function(){
 		if(checkInput(N("#cmb-silo").val(), "DEBE SELECCIONAR UN SILO.", "danger")){return};
 		if(checkInput(N("#cmb-producto").val(), "DEBE SELECCIONAR UN PRODUCTO.", "danger")){return};
-		if(checkInput(N("#txt_SiloCantidadRecarga").val(), "DEBE INGRESAR UNA CANTIDAD.", "danger")){return};
+        if(checkInput(N("#txt_SiloCantidadRecarga").val(), "DEBE INGRESAR UNA CANTIDAD.", "danger")){return};
+        if(checkNum(N("#txt_SiloCantidadRecarga").val(), "LA CANTIDAD DEBE SER UN VALOR NUMERICO.", "danger")){return};        
         if(checkInput(N("#txt_SiloFechaRecarga").val(), "DEBE INGRESAR UNA FECHA.", "danger")){return};
         LoadFunctions._AddProductSilo(LoadVars);
     });
@@ -49,6 +64,10 @@
 
     $("#txt_SiloMerma").change(function(){
         LoadVars.merma = $(this).val();
+    });
+
+    $("#txt_SiloManufactura").change(function(){
+        LoadVars.manufactura = $(this).val();
     });
 
 

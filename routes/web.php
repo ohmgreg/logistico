@@ -24,6 +24,11 @@ Route::get('/clear-cache', function(){
 Route::get('/SilosRecarga', function(){    
     return view('silos.SilosRecarga');
 });
+Route::get('/OrdenDistribucion', function(){    
+    return view('OrdenDistribucion.OrdenDistribucion');
+});
+
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -37,7 +42,8 @@ route::post('_AddProductSilo',  'SiloController@_AddProductSilo');
 route::post('_listSilo',        'SiloController@_listSilo');
 route::post('_listSiloRecarga', 'SiloController@_listSiloRecarga');
 route::post('_ShowMerma',       'SiloController@_ShowMerma');
-route::post('_updateMerma',       'SiloController@_updateMerma');
+route::post('_updateMerma',     'SiloController@_updateMerma');
+route::post('_updateManufactura',     'SiloController@_updateManufactura');
 
 
 

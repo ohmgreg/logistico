@@ -5,7 +5,6 @@
 */
 
 ;(function(wdw){
-
 var arrFiles = [];
 
 var newElem = function(a){return document.createElement(a);}

@@ -11,7 +11,7 @@
                     <label>CANTIDAD:</label>
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
-                        <input class="form-control input-sm ctrUpdate OnlyNum" type="text" pattern="[1-9]" placeholder="INGRESE LAS CANTIDADES EN TONELADAS" id=txt_SiloCantidadRecarga >
+                        <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="INGRESE LAS CANTIDADES EN TONELADAS" id=txt_SiloCantidadRecarga >
                     </div>
                 </div>
                 <div class="form-group">                        
@@ -33,22 +33,32 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">REGISTRO DE RECARGAS</div>
             <div class="panel-body">
                 <table id="tableSilosRecarga" class="table" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>RECARGA</th>
-                            <th id="thOperaciones">OPERACIONES</th>             
+                            <th>FECHA</th>
+                            <th>OPERACION</th>                            
+                            <th>MERMA (Kg)</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD (Ton)</th>
+                            <th>MANUFACTURA (Sacos)</th>
+                            <th id="thOperaciones">ACCION</th>             
                         </tr>
                     </thead>
                     <tbody></tbody>
                     <tfoot>
                         <tr>
-                            <th>RECARGA</th>
-                            <th id="thOperaciones">OPERACIONES</th>             
+                            <th>FECHA</th>
+                            <th>OPERACION</th>                            
+                            <th>MERMA (Kg)</th>
+                            <th>PRODUCTO</th>
+                            <th>CANTIDAD (Ton)</th>
+                            <th>MANUFACTURA (Sacos)</th>
+                            <th id="thOperaciones">ACCION</th>             
                         </tr>
                     </tfoot>
                 </table>
@@ -58,6 +68,8 @@
 </div>
 
 @include('silos.silosRecargaMerma')
+@include('silos.silosRecargaManufactura')
+
 
 @endsection
 @section('script')

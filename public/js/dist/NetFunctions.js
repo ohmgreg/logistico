@@ -1,5 +1,5 @@
 ;(function(win){
-    win.Logist = {};
+    window.Logist = {};
     win.lenguaje_espanol = {
         "decimal": "",
         "emptyTable": "No hay datos disponibles en la tabla",
@@ -62,9 +62,28 @@
         });
     }
 
+    win.InitControl = function(){
+        $("input, textarea").val("");
+        $("select").empty();        
+    }
 
+    window.checkInput = function(a, b, c){
+        var sw = false;
+        if(a == ""){
+            Notify(b, c);
+            sw = true;
+        }
+        return sw;
+    };
 
-
+    window.checkNum = function(a, b, c){
+        var sw = false;
+        if(!/^([0-9]{1,5})$/.test(a)){
+            Notify(b, c);
+            sw = true;
+        }
+        return sw;
+    };
 
 
 
@@ -180,14 +199,7 @@ window.loadSelect = function(url, idSelect, optValue, optText, idSearch, swGrid,
     });
 };
 
-window.checkInput = function(a, b, c){
-    var sw = false;
-    if(a == ""){
-        Notify(b, c);
-        sw = true;
-    }
-    return sw;
-};
+
 
 window.swCheck = function(id){
     // console.log(id)

@@ -30,4 +30,8 @@ class SiloController extends Controller
     public function _ShowMerma(Request $data){
         return $this->ShowMerma($data);
     }
+
+    public function _updateManufactura(Request $data){
+        return $this->updateManufactura($data);
+    }
 }

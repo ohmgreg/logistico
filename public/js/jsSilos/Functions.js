@@ -31,11 +31,21 @@
     WinFunc._listSiloRecarga = function(id_Silo){
         Ajax("_listSiloRecarga", LoadVars, function(data){
             var strTd = "";
-            for(var i = 0; i < data.length; i++){
+            for(var i = 0; i < data.length; i++){                
                 strTd += '<tr>';
-                strTd += isNull(data[i]["cod_recarga"]) ? '<td></td>' : '<td width="400px">' + data[i]["cod_recarga"] + '</td>';
-                strTd += '<td style="text-align: center;">'
-                strTd += '<button type="button" class="btn btn-primary btn-flat" id="btn_merma"><i class="" id = ' + data[i]["id"] + '>MERMA</i></button>';
+                strTd += isNull(data[i]["fecha"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["fecha"] + '</td>';
+                strTd += isNull(data[i]["cod_recarga"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cod_recarga"] + '</td>';
+                strTd += isNull(data[i]["merma"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["merma"] +'</td>';
+                strTd += isNull(data[i]["nombre"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["nombre"] + '</td>';
+                strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] / 1000 + '</td>';
+                strTd += isNull(data[i]["manufactura"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["manufactura"] + '</td>';
+                strTd += '<td style="text-align: left;">';
+                if(isNull(data[i]["manufactura"])){
+                    strTd += '<button type="button" data-toggle="tooltip" title="MANUFACTURAR" class="btn btn-primary btn-flat" id="btn_manufactura"><i class="fa fa-industry" id =' + data[i]["id"] + '></i></button>';
+                }
+                if(isNull(data[i]["merma"])){
+                    strTd += '<button type="button" data-toggle="tooltip" title="ASIGNAR MERMA" class="btn btn-danger btn-flat" id="btn_merma"><i class="fa fa-minus-circle" id =' + data[i]["id"] + '></i></button>';
+                }
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
@@ -54,15 +64,31 @@
         })
     }
 
+    WinFunc._ShowManufactura = function(data){
+        $('#M-Insert-1').modal('show')
+    }
+
     WinFunc._updateMerma = function(data){
         Ajax("_updateMerma", LoadVars, function(data){
+            WinFunc._listSiloRecarga(LoadVars);
             $('#M-Insert').modal('hide');
+        }, true)
+    }
+
+    WinFunc._updateManufactura = function(data){
+        Ajax("_updateManufactura", LoadVars, function(data){
+            $("#txt_SiloManufactura").val("");
+            WinFunc._listSiloRecarga(LoadVars);            
+            $('#M-Insert-1').modal('hide');
         }, true)
     }
 
     WinFunc._AddProductSilo = function(data){
         Ajax("_AddProductSilo", LoadVars, function(data){
-            WinFunc._listSiloRecarga(N("#cmb-silo").val());
+            WinFunc._listSiloRecarga(LoadVars);
+            InitControl();
+            LoadFunctions._listSilo("cmb-silo");
+            LoadFunctions._listproducts("cmb-producto");
         }, true)
     }
 

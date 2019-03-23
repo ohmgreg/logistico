@@ -11,6 +11,8 @@ class LogistPanaderiaSiloAlmacenIncorporacion extends Model
                             'cod_recarga',
                             'id_Silo',
                             'id_producto',
+                            'manufactura',
+                            'existencia',
                             'fecha',
                             'cantidad',
                             'merma',

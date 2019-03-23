@@ -30,6 +30,11 @@
 		"jsSilos/Events.js",		
 		"jsSilos/Init.js"
 	],
+	"jsOrdenDistribucion":[
+		"jsOrdenDistribucion/Functions.js",
+		"jsOrdenDistribucion/Events.js",		
+		"jsOrdenDistribucion/Init.js"
+	],
 	"cssComun": [
 		"app_.css",
 		"netInit.min.css",
