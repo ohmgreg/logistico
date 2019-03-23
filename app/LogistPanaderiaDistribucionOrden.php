@@ -12,5 +12,6 @@ class logistpanaderiadistribucionorden extends Model
         'fechafin',
         'codigo',
         'activo',
+        'cantDist',
     ];
 }

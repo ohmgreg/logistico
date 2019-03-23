@@ -4,5 +4,6 @@ N(".preload").nodeRemove(function(){
 		var d = new Date();
 		d.setDate(d.getDate() - 1);
 		$('.datepicker').datepicker({language: 'es', startDate: d});
+		LoadFunctions._ListDistributionOrder();
 	}, 200)
 }, 200);

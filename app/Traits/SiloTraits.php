@@ -56,7 +56,13 @@ trait SiloTraits
     public function AddProductSilo($data)
     {
         $count_recarga = logistConfig::value('RecargaSilo') + 1;
-        $cod_recarga = $data['id_Silo'] .'-'.$data['fecha'] . '-' .$count_recarga;
+        if ((strlen(strval($count_recarga))) == 1) {$count_recarga_str = '0'. strval($count_recarga);}
+        if ((strlen(strval($count_recarga))) == 2) {$count_recarga_str = '00'. strval($count_recarga);}
+        $lafecha = str_replace("/", "", $data['fecha']);
+        if ((strlen(strval($data['id_Silo']))) == 1) {$silo_str = '0'. strval($count_recarga);}
+        if ((strlen(strval($data['id_Silo']))) == 2) {$silo_str = '00'. strval($count_recarga);}  
+        $cod_recarga = $silo_str .'*'.$lafecha . '*' .$count_recarga_str;
+
         LogistPanaderiaSiloAlmacenIncorporacion::create([
             'fecha' => $data['fecha'],
             'cantidad' => $data['cantidad'],

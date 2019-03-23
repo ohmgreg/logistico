@@ -78,12 +78,19 @@
 
     window.checkNum = function(a, b, c){
         var sw = false;
-        if(!/^([0-9]{1,5})$/.test(a)){
+        if(!/^[0-9]+([\.|\,]*[0-9]{1,2})?$/.test(a)){
             Notify(b, c);
             sw = true;
         }
         return sw;
     };
+
+    win.NewDate = function(a){
+        var year = a.substr(6, 4);
+        var mes = a.substr(3, 1) == 0 ? a.substr(4, 1) : a.substr(3, 2);
+        var dia = a.substr(0, 1) == 0 ? a.substr(1, 1) : a.substr(0, 2);
+        return Date.UTC(year, mes, dia);
+    }
 
 
 

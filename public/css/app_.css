@@ -82,7 +82,6 @@ z-index: -1;
 }
 
 label.btn.btn-default.active{
-    width: 180px;
     margin-right: 10px;
     margin-bottom: 10px;
 }
@@ -179,4 +178,10 @@ b, strong{
 
 .noresize{
     resize: none; 
+}
+
+.panel-heading{
+    background-color: #222d32 !important;
+    color: white !important;
+    border-color: #222d32 !important;
 }
