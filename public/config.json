@@ -35,6 +35,16 @@
 		"jsOrdenDistribucion/Events.js",		
 		"jsOrdenDistribucion/Init.js"
 	],
+	"jsRecepcionMercancia":[
+		"jsRecepcionMercancia/Functions.js",
+		"jsRecepcionMercancia/Events.js",		
+		"jsRecepcionMercancia/Init.js"
+	],
+	"jsAjusteInventario":[
+		"jsAjusteInventario/Functions.js",
+		"jsAjusteInventario/Events.js",		
+		"jsAjusteInventario/Init.js"
+	],	
 	"cssComun": [
 		"app_.css",
 		"netInit.min.css",

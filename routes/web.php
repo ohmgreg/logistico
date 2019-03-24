@@ -28,6 +28,14 @@ Route::get('/OrdenDistribucion', function(){
     return view('OrdenDistribucion.OrdenDistribucion');
 });
 
+Route::get('/RecepcionMercancia', function(){    
+    return view('RecepcionMercancia.RecepcionMercancia');
+});
+
+Route::get('/AjusteInventario', function(){    
+    return view('AjusteInventario.AjusteInventario');
+});
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -57,6 +65,12 @@ route::post('_DelWarehouseDistributor',     'OrdenDistribucionController@_DelWar
 route::post('_ListDistributor',         'DistribuidorController@_ListDistributor');
 route::post('_AddWarehouseDistributor', 'DistribuidorController@_AddWarehouseDistributor');
 route::post('_DetaleDistributionOrder', 'DistribuidorController@_DetaleDistributionOrder');
+route::post('_ListProductsInTransit',   'DistribuidorController@_ListProductsInTransit');
+route::post('_ProductReception',        'DistribuidorController@_ProductReception');
+route::post('_ListProductsInWarehouse', 'DistribuidorController@_ListProductsInWarehouse');
+
+
+
 
 route::post('_listproducts','ProductoController@_listproducts');
 

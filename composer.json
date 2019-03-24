@@ -9,6 +9,7 @@
         "evercode1/trait-maker": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "nesbot/carbon": "^1.36",
         "y-urbanevich/laravel-create-update-trait": "dev-master"
     },
     "require-dev": {

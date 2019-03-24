@@ -23,19 +23,30 @@ class DistribuidorController extends Controller
         return $this->ListDistributor();
     }
 
-    public function _ShowDistributor(request $data){
+    public function _ShowDistributor(Request $data){
         return $this->ShowDistributor($data);
     }
 
-    public function _AddWarehouseDistributor(request $data){
+    public function _AddWarehouseDistributor(Request $data){
         if ($this->DiscountExistenceOfTheSilo($data) == 1){
             return $this->AddWarehouseDistributor($data);
-        }
-                
+        }                
     }
 
-    public function _DetaleDistributionOrder (request $data){        
+    public function _DetaleDistributionOrder (Request $data){        
         return $this->DetaleDistributionOrder($data);
+    }
+
+    public function _ListProductsInTransit(Request $data){
+        return $this->ListProductsInTransit($data);
+    }
+
+    public function _ProductReception(Request $data){
+        return $this->ProductReception($data);
+    }
+
+    public function _ListProductsInWarehouse(Request $data){
+        return $this->ListProductsInWarehouse($data);
     }
 
 }

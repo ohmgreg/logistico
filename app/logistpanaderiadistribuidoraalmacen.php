@@ -19,6 +19,7 @@ class logistpanaderiadistribuidoraalmacen extends Model
         'merma',
         'status',
         'id_Silo',
+        'fecharecepcion',
                    
 ]; 
 
