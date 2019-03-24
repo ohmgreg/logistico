@@ -124,7 +124,43 @@ public function AsigClientOrderofOperations(){
 
 public function DispatchAssignmentInOrderOfOperations($data){
 
-    // $id_detalle = LogistPanaderiaOrdenOperacionesAsignacionDetalle::cretae([])
+
+    $id_OrdenOperacionesAsignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
+        'id_OrdenDeOperaciones' => $data->id_OrdenDeOperaciones,
+        'id_panadera' => $data->id_OrdenDeOperaciones,
+        'fechaAsignacion' => $data->fechaAsignacion,
+        'pesoTN' => ($data->cantidad * 50)/1000
+    ]);
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    return LogistPanaderiaOrdenOperacionesAsignacionDetalle::cretae([
+
+
+        // 'id_OrdenDistribucion'
+        // 'id_Distribuidora' => $data->distribuidora,
+        // 'id_producto' =>
+        // 'cantidad' =>
+        // 'id_OrdenTransporte' =>
+        // 'id_OrdenOperacionesAsignacion' => $id_OrdenOperacionesAsignacion,
+        // 'costo' =>
+        // 'precio' =>
+        // 'id_alamcenDistribucion' =>
+
+        
+
+    ]);
 
 }
 

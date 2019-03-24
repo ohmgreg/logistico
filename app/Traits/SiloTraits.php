@@ -33,10 +33,10 @@ trait SiloTraits
         logistpanaderiasiloalmacenincorporacion.nota,
         logistpanaderiasiloalmacenincorporacion.created_at,
         logistpanaderiasiloalmacenincorporacion.updated_at,
-        logistpanaderiaproductos.nombre
+        LogistPanaderiaProductos.nombre
         FROM
         logistpanaderiasiloalmacenincorporacion
-        INNER JOIN logistpanaderiaproductos ON logistpanaderiasiloalmacenincorporacion.id_producto = logistpanaderiaproductos.id
+        INNER JOIN LogistPanaderiaProductos ON logistpanaderiasiloalmacenincorporacion.id_producto = LogistPanaderiaProductos.id
         WHERE
         logistpanaderiasiloalmacenincorporacion.id_Silo = 1";
         return DB::select($sql_string);
