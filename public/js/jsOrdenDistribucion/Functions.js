@@ -54,10 +54,10 @@
                 strTd += isNull(data[i]["codigo"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["codigo"] + '</td>';
                 strTd += isNull(data[i]["fechainicio"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["fechainicio"] + " - " + data[i]["fechafin"] + '</td>';
                 strTd += isNull(data[i]["cantDist"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantDist"] +'</td>';
-                strTd += data[i]["activo"] == 0 ? '<td>NO</td>' : '<td>SI</td>';
+                // strTd += data[i]["activo"] == 0 ? '<td>NO</td>' : '<td>SI</td>';
                 strTd += '<td style="text-align: left;">';
                 if(data[i]["activo"] == 0){
-                    strTd += '<button type="button" data-toggle="tooltip" title="ACTIVAR ORDEN DE OPERACION" class="btn btn-primary btn-flat" id="btn_swOrdenActiva"><i class="fa fa-check" id =' + data[i]["id"] + '></i></button>';
+                    // strTd += '<button type="button" data-toggle="tooltip" title="ACTIVAR ORDEN DE OPERACION" class="btn btn-primary btn-flat" id="btn_swOrdenActiva"><i class="fa fa-check" id =' + data[i]["id"] + '></i></button>';
                 }
                 strTd += '<button type="button" data-toggle="tooltip" title="AGREGAR DETALLE DE LA ORDEN DE OPERACION" class="btn btn-primary btn-flat" id="btn_DetalleAdd"><i class="fa fa-pencil-square-o" id =' + data[i]["id"] + '></i></button>';
                 strTd += '</td>';
@@ -89,9 +89,27 @@
 
     WinFunc._AddWarehouseDistributor = function(data){
         Ajax("_AddWarehouseDistributor", LoadVars, function(data){
+            FormControlInit("#FormOrdenDetalle");
+            LoadFunctions._listSilo("cmb-silo");
+            LoadFunctions._listDistribuidora("cmb-distribuidora");
+            LoadFunctions._listproducts("cmb-producto");
             LoadFunctions._DetaleDistributionOrder(LoadVars);            
         }, true)
     }
+
+    WinFunc._DelWarehouseDistributor = function(data){
+        Ajax("_DelWarehouseDistributor", LoadVars, function(data){
+            LoadFunctions._DetaleDistributionOrder(LoadVars);
+            $('#M-Insert-1').modal('hide');     
+        }, true)
+    }
+
+    WinFunc._ExistenceOfSilo = function(data){
+        Ajax("_ExistenceOfSilo", LoadVars, function(data){
+            LoadVars.SiloExistencia = data;
+        })
+    }
+
     WinFunc._DetaleDistributionOrder = function(data){
         Ajax("_DetaleDistributionOrder", LoadVars, function(data){
             var strTd = "";

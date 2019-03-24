@@ -1,37 +1,37 @@
 @extends('Modals.M-Insert-2')
-
 @section('content-M2')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading" id="HeadingId">ORDEN DE DISTRIBUCION</div>
             <div class="modal-body">
-                <div><label>SELECCIONE UN SILO</label><select id='cmb-silo' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
-                <div><label>SELECCIONE UNA DISTRIBUIDORA</label><select id='cmb-distribuidora' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
-                <div><label>SELECCIONE UN PRODUCTO</label><select id='cmb-producto' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>         
-                <div class="form-group">
-                    <label>CANTIDAD:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
-                        <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="INGRESE LAS CANTIDADES EN SACOS" id=txt_DetalleCantidad >
+                <form action="" id="FormOrdenDetalle">
+                    <div><label>SELECCIONE UN SILO</label><select id='cmb-silo' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
+                    <div><label>SELECCIONE UNA DISTRIBUIDORA</label><select id='cmb-distribuidora' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
+                    <div><label>SELECCIONE UN PRODUCTO</label><select id='cmb-producto' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>         
+                    <div class="form-group">
+                        <label>CANTIDAD:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
+                            <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="INGRESE LAS CANTIDADES EN SACOS" id=txt_DetalleCantidad >
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>PRECIO DE COMPRA:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
-                        <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="" id=txt_DetallePrecioCompra >
+                    <div class="form-group">
+                        <label>PRECIO DE COMPRA:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
+                            <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="" id=txt_DetallePrecioCompra >
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label>PRECIO DE VENTA:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
-                        <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="" id=txt_DetallePrecioVenta >
+                    <div class="form-group">
+                        <label>PRECIO DE VENTA:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-pencil-square-o"></i></div>
+                            <input class="form-control input-sm ctrUpdate" type="text" pattern="[1-9]" placeholder="" id=txt_DetallePrecioVenta >
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnDetalleAdd">CREAR DETALLE</button>
             </div>

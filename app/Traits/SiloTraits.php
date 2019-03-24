@@ -107,10 +107,10 @@ trait SiloTraits
     }
 
     public function updateManufactura($data){
-
         logistpanaderiaSiloalmacenincorporacion::where('id',$data['id_incorporacion'])
         ->update([
-                'manufactura'=>$data['manufactura']
+                'manufactura'=>$data['manufactura'],
+                'existencia'=>$data['manufactura']
         ]);
         $id_LogistPanaderiaSiloAlmacen = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
         $ExistenciaProducto = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
@@ -120,7 +120,48 @@ trait SiloTraits
             'cantidad' => $ExistenciaProducto,
         ]);
     }
+
+    public function ExistenceOfSilo($data){
+        return LogistPanaderiaSiloAlmacenIncorporacion::where('id_Silo', $data->id_Silo)->where('existencia','>',0)->sum('existencia');
+   }
+
+   public function DiscountExistenceOfTheSilo($data){
+
+    $ArrayExisencia = LogistPanaderiaSiloAlmacenIncorporacion::where('existencia','>','0')
+    ->where('id_Silo',$data->id_Silo)->orderBy('id', 'asc')->get();
+
+
+    $techo = $data->cantidad;
+    $i = 0;
+
+     while ($techo > 0) {
+        $existencia = $ArrayExisencia[$i]->existencia;
+        $id = $ArrayExisencia[$i]->id;
+        $residuo = $techo - $existencia;
+        if($residuo > 0){
+            LogistPanaderiaSiloAlmacenIncorporacion::where('id','=',$id)->update([
+                'existencia' => 0,
+            ]);
+            $techo = $residuo;
+            $i = $i + 1;
+        } else {
+            $resto = $existencia - $techo;
+            $techo = 0;
+            LogistPanaderiaSiloAlmacenIncorporacion::where('id','=',$id)->update([
+                'existencia' => $resto,
+            ]);
+        }       
+        
+     }
+     return 1;
+    
+
+
+   }
+
+
 // Fin del traits
+
 }
 
 

@@ -7,12 +7,16 @@ use DB;
 
 use App\traits\DistributorTraits;
 use App\traits\DistributionOrderTrait;
+use App\Traits\SiloTraits;
+
+
 
 class DistribuidorController extends Controller
 
 {
     use DistributorTraits;
     use DistributionOrderTrait;
+    use SiloTraits;
 
     public function _ListDistributor(){
 
@@ -24,14 +28,14 @@ class DistribuidorController extends Controller
     }
 
     public function _AddWarehouseDistributor(request $data){
-        return $this->AddWarehouseDistributor($data);        
+        if ($this->DiscountExistenceOfTheSilo($data) == 1){
+            return $this->AddWarehouseDistributor($data);
+        }
+                
     }
 
-    public function _DetaleDistributionOrder (request $data){
-        
+    public function _DetaleDistributionOrder (request $data){        
         return $this->DetaleDistributionOrder($data);
-
-
     }
 
 }

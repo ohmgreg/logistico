@@ -7,6 +7,6 @@
 @endsection
 
 @section('footer-M1')    
-    <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnDeleteNo">NO</button>
     <button type="button" class="btn btn-primary" id="btnDeleteYes">SI</button>    
 @endsection

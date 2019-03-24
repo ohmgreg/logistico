@@ -27,7 +27,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12 col-md-offset-0">
+    <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
             <div class="panel-heading">REGISTRO DE ORDENES DE DISTRIBUCION</div>
             <div class="panel-body">
@@ -36,8 +36,8 @@
                         <tr>
                             <th>ORDEN</th>
                             <th>PERIODO</th>
-                            <th>CANT DISTRIBUIDA (Ton)</th>
-                            <th>ACTIVA</th>
+                            <th>CANT DISTRIBUIDA (Sacos)</th>
+                            {{-- <th>ACTIVA</th> --}}
                             <th id="thOperaciones">ACCION</th>             
                         </tr>
                     </thead>
@@ -46,8 +46,8 @@
                         <tr>
                             <th>ORDEN</th>
                             <th>PERIODO</th>
-                            <th>CANT DISTRIBUIDA (Ton)</th>
-                            <th>ACTIVA</th>
+                            <th>CANT DISTRIBUIDA (Sacos)</th>
+                            {{-- <th>ACTIVA</th> --}}
                             <th id="thOperaciones">ACCION</th>
                         </tr>
                     </tfoot>

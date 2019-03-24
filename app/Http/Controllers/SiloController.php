@@ -34,4 +34,16 @@ class SiloController extends Controller
     public function _updateManufactura(Request $data){
         return $this->updateManufactura($data);
     }
+    public function _ExistenceOfSilo(Request $data){
+        return $this->ExistenceOfSilo($data);
+    }
+
+    public function _DiscountExistenceOfTheSilo(Request $data){
+        
+        return $this->DiscountExistenceOfTheSilo($data);
+
+    }
+
+
+
 }

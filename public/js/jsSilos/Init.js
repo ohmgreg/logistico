@@ -5,6 +5,6 @@ N(".preload").nodeRemove(function(){
 		d.setDate(d.getDate() - 1);
 		$('.datepicker').datepicker({language: 'es', startDate: d});
 		LoadFunctions._listSilo("cmb-silo");
-		LoadFunctions._listproducts("cmb-producto");		
+		LoadFunctions._listproducts("cmb-producto");
 	}, 200)
 }, 200);

@@ -85,6 +85,25 @@ var prot = {
 			addEvento(this, "click", fn);
 		}		
 	},
+	html: function(a){
+		var arr = [];
+		if (a == undefined){
+			if(this.toArray(this).length == 1){
+				arr = this[0].innerHTML;
+			}else{
+				this.toArray(this).forEach(function(c){
+					arr.push(c.innerHTML);
+				});				
+			}
+			return arr;
+		}else{
+			if(typeof(a) === "string"){
+				this.toArray(this).forEach(function(c){
+					c.innerHTML = a;
+				});
+			}
+		}
+	},
 	nodeAdd: function(htmlArch, idName, className, fn, time, fnEl){
 		fn = fn == undefined ? function(){} : fn;
 		time = time == undefined ? 400 : time;

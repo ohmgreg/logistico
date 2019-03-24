@@ -92,6 +92,14 @@
         return Date.UTC(year, mes, dia);
     }
 
+    win.FormControlInit = function(id_Form){
+        N(id_Form + " input").val("");
+        N(id_Form + " textarea").val("");
+        N(id_Form + " select").html('')
+    }
+
+
+
 
 
 

@@ -16,6 +16,7 @@ trait DistributorTraits
     public function ShowDistributor($data){
         return LogistPanaderiaDistribuidora::where('id', $data->id_Distibuidora)->get();
     }
+    
     public function AddWarehouseDistributor($data){
         return logistpanaderiadistribuidoraalmacen::create([
             'id_producto'=>$data->id_producto,
@@ -28,7 +29,8 @@ trait DistributorTraits
             'id_Silo'=>$data->id_Silo,            
         ]);
     }
+
     public function DelWarehouseDistributor($data){
-        return logistpanaderiadistribuidoraalmacen::where('id', $data->id_OrdenDistribucionDelete)->delete();
+        return logistpanaderiadistribuidoraalmacen::where('id','=', $data->id_OrdenDistribucionDelete)->delete();
     }
 }

@@ -18,6 +18,7 @@
 
     $("#cmb-silo").change(function(){
         LoadVars.id_Silo = $(this).val();
+        LoadFunctions._ExistenceOfSilo();
     });
 
     $("#cmb-distribuidora").change(function(){
@@ -47,6 +48,7 @@
 
     $("#tableOrdenDistribucionDetalle").on("click", "#btn_DetalleDelete", function(){
         LoadVars.id_OrdenDistribucionDelete = $(this)[0].firstChild.id;
+        $('#M-Insert-2').css("overflow-y","auto");
         $('#M-Insert-1').modal('show');
     });
 
@@ -76,6 +78,7 @@
         if(checkNum(N("#txt_DetalleCantidad").val(), "LA CANTIDAD DEBE SER UN VALOR NUMERICO.", "danger")){return};
         if(checkNum(N("#txt_DetallePrecioCompra").val(), "EL PRECIO DE COMPRA DEBE SER UN VALOR NUMERICO.", "danger")){return};
         if(checkNum(N("#txt_DetallePrecioVenta").val(), "EL PRECIO DE VENTA DEBE SER UN VALOR NUMERICO.", "danger")){return};
+        if(N("#txt_DetalleCantidad").val() > LoadVars.SiloExistencia){Notify("LA CANTIDAD A DISTRIBUIR NO PUEDE EXCEDER A LA EXISTENCIA MANUFACTURADA DEL SILO.", "danger"); return}
         LoadFunctions._AddWarehouseDistributor(LoadVars);
     });
 
@@ -83,6 +86,10 @@
         LoadFunctions._ActivateOrderOfDistribution(LoadVars);
     });
 
+    N("#btnDeleteYes").click(function(){
+        LoadFunctions._DelWarehouseDistributor(LoadVars);
+        
+    });
 
 
 
