@@ -9,5 +9,10 @@ class logistConfig extends Model
     protected $table = 'logistconfig';
     protected $fillable = [
         'RecargaSilo',
+        'OrdenDistribucion',
+        'OrdenOperacion', 
+
+
+
     ];
 }

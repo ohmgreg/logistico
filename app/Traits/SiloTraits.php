@@ -21,24 +21,24 @@ trait SiloTraits
     {   
         // return LogistPanaderiaSiloAlmacenIncorporacion::where('id_Silo', $data->id_Silo)->get();
         $sql_string = "SELECT
-        logistpanaderiasiloalmacenincorporacion.id,
-        logistpanaderiasiloalmacenincorporacion.cod_recarga,
-        logistpanaderiasiloalmacenincorporacion.id_Silo,
-        logistpanaderiasiloalmacenincorporacion.id_producto,
-        logistpanaderiasiloalmacenincorporacion.fecha,
-        logistpanaderiasiloalmacenincorporacion.cantidad,
-        logistpanaderiasiloalmacenincorporacion.manufactura,
-        logistpanaderiasiloalmacenincorporacion.existencia,
-        logistpanaderiasiloalmacenincorporacion.merma,
-        logistpanaderiasiloalmacenincorporacion.nota,
-        logistpanaderiasiloalmacenincorporacion.created_at,
-        logistpanaderiasiloalmacenincorporacion.updated_at,
+        LogistPanaderiaSiloAlmacenIncorporacion.id,
+        LogistPanaderiaSiloAlmacenIncorporacion.cod_recarga,
+        LogistPanaderiaSiloAlmacenIncorporacion.id_Silo,
+        LogistPanaderiaSiloAlmacenIncorporacion.id_producto,
+        LogistPanaderiaSiloAlmacenIncorporacion.fecha,
+        LogistPanaderiaSiloAlmacenIncorporacion.cantidad,
+        LogistPanaderiaSiloAlmacenIncorporacion.manufactura,
+        LogistPanaderiaSiloAlmacenIncorporacion.existencia,
+        LogistPanaderiaSiloAlmacenIncorporacion.merma,
+        LogistPanaderiaSiloAlmacenIncorporacion.nota,
+        LogistPanaderiaSiloAlmacenIncorporacion.created_at,
+        LogistPanaderiaSiloAlmacenIncorporacion.updated_at,
         LogistPanaderiaProductos.nombre
         FROM
-        logistpanaderiasiloalmacenincorporacion
-        INNER JOIN LogistPanaderiaProductos ON logistpanaderiasiloalmacenincorporacion.id_producto = LogistPanaderiaProductos.id
+        LogistPanaderiaSiloAlmacenIncorporacion
+        INNER JOIN LogistPanaderiaProductos ON LogistPanaderiaSiloAlmacenIncorporacion.id_producto = LogistPanaderiaProductos.id
         WHERE
-        logistpanaderiasiloalmacenincorporacion.id_Silo = 1";
+        LogistPanaderiaSiloAlmacenIncorporacion.id_Silo = 1";
         return DB::select($sql_string);
 
     }
@@ -71,6 +71,7 @@ trait SiloTraits
             'id_producto' => $data['id_producto'],
             'cod_recarga' => $cod_recarga,
         ]);
+
         logistConfig::where('id', '1')->update(['RecargaSilo' => $count_recarga]);
         $ExistProduct = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->count();
         if ($ExistProduct !== 0) {
@@ -93,7 +94,7 @@ trait SiloTraits
 
     public function updateMerma($data){
 
-        logistpanaderiaSiloalmacenincorporacion::where('id',$data['id_incorporacion'])
+        LogistPanaderiaSiloAlmacenIncorporacion::where('id',$data['id_incorporacion'])
         ->update([
                 'merma'=>$data['merma']
         ]);
@@ -107,7 +108,7 @@ trait SiloTraits
     }
 
     public function updateManufactura($data){
-        logistpanaderiaSiloalmacenincorporacion::where('id',$data['id_incorporacion'])
+        LogistPanaderiaSiloAlmacenIncorporacion::where('id',$data['id_incorporacion'])
         ->update([
                 'manufactura'=>$data['manufactura'],
                 'existencia'=>$data['manufactura']
