@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class logistConfig extends Model
 {
-    protected $table = 'logistConfig';
+    protected $table = 'logistconfig';
     protected $fillable = [
         'RecargaSilo',
     ];

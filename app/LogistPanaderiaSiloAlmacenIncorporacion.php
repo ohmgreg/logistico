@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LogistPanaderiaSiloAlmacenIncorporacion extends Model
 {
-    protected $table = 'LogistPanaderiaSiloAlmacenIncorporacion';
+    protected $table = 'logistpanaderiasiloalmacenincorporacion';
     protected $fillable = [
                             'cod_recarga',
                             'id_Silo',

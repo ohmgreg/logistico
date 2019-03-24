@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LogistPanaderiaOrdenOperacionesAsignacion extends Model
 {
-    protected $table = 'LogistPanaderiaOrdenOperacionesAsignacion';
+    protected $table = 'logistpanaderiaordenoperacionesasignacion';
     protected $fillable = [
         'id_OrdenDeOperaciones',
         'id_panadera',
