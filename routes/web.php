@@ -36,6 +36,10 @@ Route::get('/AjusteInventario', function(){
     return view('AjusteInventario.AjusteInventario');
 });
 
+Route::get('/OrdenOperaciones', function(){    
+    return view('OrdenOperaciones.Index');
+});
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -52,15 +56,22 @@ route::post('_DiscountExistenceOfTheSilo',   'SiloController@_DiscountExistenceO
 
 
 
-
-
-
+route::post('_ListResponsibleOrderofOperations',   'OrdenDeOperacionesController@_ListResponsibleOrderofOperations');
+route::post('_AddOrderOfOperation',   'OrdenDeOperacionesController@_AddOrderOfOperation');
+route::post('_listOrderOfOperation',   'OrdenDeOperacionesController@_listOrderOfOperation');
+route::post('_DistributionOrderList',     'OrdenDeOperacionesController@_DistributionOrderList');
 
 
 route::post('_AddDistributionOrder',        'OrdenDistribucionController@_AddDistributionOrder');
 route::post('_ListDistributionOrder',       'OrdenDistribucionController@_ListDistributionOrder');
 route::post('_ActivateOrderOfDistribution', 'OrdenDistribucionController@_ActivateOrderOfDistribution');
 route::post('_DelWarehouseDistributor',     'OrdenDistribucionController@_DelWarehouseDistributor');
+
+
+
+
+
+
 
 route::post('_ListDistributor',         'DistribuidorController@_ListDistributor');
 route::post('_AddWarehouseDistributor', 'DistribuidorController@_AddWarehouseDistributor');

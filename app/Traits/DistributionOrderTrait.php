@@ -17,17 +17,20 @@ trait DistributionOrderTrait
     }
 
     public function AddDistributionOrder($data){       
-        $count_od = logistConfig::value('OrdenDist') + 1;
+        $count_od  = logistConfig::value('OrdenDistribucion') + 1;
         if ((strlen(strval($count_od))) == 1) {$count_od_str = '0'. strval($count_od);}
         if ((strlen(strval($count_od))) == 2) {$count_od_str = '00'. strval($count_od);}
         $cod_od = 'OD-' . date("Y") . '-' . $count_od_str;        
-        return LogistPanaderiaDistribucionOrden::create([
+        LogistPanaderiaDistribucionOrden::create([
             'fechainicio' => $data['fechainicio'],
             'fechafin' => $data['fechafin'],
             'codigo' => $cod_od,
             'activo' => $data['activo'],       
         ]);
-        logistConfig::where('id',1)->update(['RecargaSilo' => $count_od]);
+
+        return logistConfig::where('id','=','1')->update([
+            'OrdenDistribucion' =>  $count_od,
+        ]);
     }
 
     public function ActivateOrderOfDistribution($data){

@@ -44,6 +44,11 @@
 		"jsAjusteInventario/Functions.js",
 		"jsAjusteInventario/Events.js",		
 		"jsAjusteInventario/Init.js"
+	],
+	"jsOrdenOperaciones":[
+		"jsOrdenOperaciones/Functions.js",
+		"jsOrdenOperaciones/Events.js",		
+		"jsOrdenOperaciones/Init.js"
 	],	
 	"cssComun": [
 		"app_.css",
