@@ -49,4 +49,8 @@ class DistribuidorController extends Controller
         return $this->ListProductsInWarehouse($data);
     }
 
+    public function _updateMermaWarehouse(Request $data){
+        return $this->updateMermaWarehouse($data);
+    }
+
 }

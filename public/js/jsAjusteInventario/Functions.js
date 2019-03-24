@@ -25,8 +25,11 @@
                 strTd += isNull(data[i]["NameProducto"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["NameProducto"] + '</td>';
                 strTd += isNull(data[i]["existencia"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["existencia"] +'</td>';
                 strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] +'</td>';
+                strTd += isNull(data[i]["merma"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["merma"] +'</td>';
                 strTd += '<td style="text-align: center;">';
-                strTd += '<button type="button" data-toggle="tooltip" title="AGREGAR MERMA" class="btn btn-danger btn-flat" id="btn_AddMerma"><i class="fa fa-minus-circle" id =' + data[i]["id"] + '></i></button>';
+                if(data[i]["merma"] == 0){
+                    strTd += '<button type="button" data-toggle="tooltip" title="AGREGAR MERMA" class="btn btn-danger btn-flat" id="btn_AddMerma"><i class="fa fa-minus-circle" id =' + data[i]["id"] + '></i></button>';
+                }
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
@@ -40,5 +43,13 @@
             $('#M-Insert').modal('hide');
         }, true)
     }
+
+    WinFunc._updateMermaWarehouse = function(data){
+        Ajax("_updateMermaWarehouse", LoadVars, function(data){
+            LoadFunctions._ListProductsInWarehouse(LoadVars);
+            $('#M-Insert').modal('hide');
+        }, true)
+    }
+
     
 })(window);

@@ -68,6 +68,7 @@ route::post('_DetaleDistributionOrder', 'DistribuidorController@_DetaleDistribut
 route::post('_ListProductsInTransit',   'DistribuidorController@_ListProductsInTransit');
 route::post('_ProductReception',        'DistribuidorController@_ProductReception');
 route::post('_ListProductsInWarehouse', 'DistribuidorController@_ListProductsInWarehouse');
+route::post('_updateMermaWarehouse',    'DistribuidorController@_updateMermaWarehouse');
 
 
 

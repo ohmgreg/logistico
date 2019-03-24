@@ -25,8 +25,9 @@
                             <th>FECHA DE RECEPCION</th>
                             <th>PROCEDENCIA</th>
                             <th>PRODUCTO</th>
-                            <th>DESPACHO (Sacos)</th>
-                            <th>CANTIDAD (Sacos)</th>                            
+                            <th>EXISTENCIA (Sacos)</th>
+                            <th>RECEPCION (Sacos)</th>
+                            <th>MERMA (Sacos)</th> 
                             <th id="thOperaciones">ACCION</th>             
                         </tr>
                     </thead>
@@ -36,8 +37,9 @@
                             <th>FECHA DE RECEPCION</th>
                             <th>PROCEDENCIA</th>
                             <th>PRODUCTO</th>
-                            <th>DESPACHO (Sacos)</th>
-                            <th>CANTIDAD (Sacos)</th>                            
+                            <th>EXISTENCIA (Sacos)</th>
+                            <th>RECEPCION (Sacos)</th>
+                            <th>MERMA (Sacos)</th>                             
                             <th id="thOperaciones">ACCION</th>   
                         </tr>
                     </tfoot>

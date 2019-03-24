@@ -50,19 +50,13 @@ trait DistributorTraits
                 'merma'=>$data['merma']
         ]);
         
-        $ExistenciaProducto = logistpanaderiadistribuidoraalmacen::where('id', $data->id_Recepcion)->value('cantidad');
+        $ExistenciaProducto = logistpanaderiadistribuidoraalmacen::where('id', $data->id_Recepcion)->value('existencia');
         $ExistenciaProducto = $ExistenciaProducto - $data['merma'];
-
         return logistpanaderiadistribuidoraalmacen::where('id', $data->id_Recepcion)
         ->update([
             'existencia' => $ExistenciaProducto,
         ]);
     }
-
-
-
-
-
 
     public function ListProductsInTransit($data){
 
@@ -107,7 +101,7 @@ trait DistributorTraits
         logistpanaderiadistribuidoraalmacen.existencia,
         -- logistpanaderiadistribuidoraalmacen.id_Distribuidora,
         -- logistpanaderiadistribuidoraalmacen.`status`,
-        -- logistpanaderiadistribuidoraalmacen.merma,
+        logistpanaderiadistribuidoraalmacen.merma,
         -- logistpanaderiadistribuidoraalmacen.id_Silo,
         -- logistpanaderiadistribuidoraalmacen.created_at,
         -- logistpanaderiadistribuidoraalmacen.updated_at,
