@@ -61,10 +61,8 @@
     });
 
     $("#tableOrdenDistribucion").on("click", "#btn_DetalleAdd", function(){
-        LoadVars.id_OrdendeDistribucion = $(this)[0].firstChild.id;
-        var fila = $(this).closest('tr').index();
-        LoadVars.name_OrdenDistrib = $('#tableOrdenDistribucion tbody').find('tr').eq(fila).find('td').eq(0).text();
-        LoadFunctions._DetaleDistributionOrder(LoadVars);
+        LoadVars.id_OrdendeOperacion = $(this)[0].firstChild.id;
+        LoadFunctions._AsigClientOrderofOperations(LoadVars);
         LoadFunctions._ShowDettalle();
     });
 
@@ -97,10 +95,26 @@
     });
 
     N("#btnDeleteYes").click(function(){
-        LoadFunctions._DelWarehouseDistributor(LoadVars);
-        
+        LoadFunctions._DelWarehouseDistributor(LoadVars);        
     });
 
+    N("#btnPanaderiaUpdate").click(function(){
+        console.log(LoadVars.tablePanaderias.rows().data());
+    });
+
+    $('#tableOrdenDistribucionDetalle tbody').on( 'click', '.sw_', function () {
+        var fila = $(this).closest('tr').index();
+        var InputSelect = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].childNodes[0];
+        var txtAsignacion = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(2).text();
+        if ($(this).prop('checked')) {
+            $(InputSelect).prop('disabled', false);
+            $(InputSelect).val(txtAsignacion);
+        }else{
+            $(InputSelect).prop('disabled', true);
+            $(InputSelect).val("");
+        }
+        console.log(txtAsignacion)
+    } );
 
 
 })(window);

@@ -8,21 +8,25 @@
                 <table id="tableOrdenDistribucionDetalle" class="table" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>DISTRIBUIDORA</th>
-                            <th>PRODUCTO</th>
-                            <th>CANTIDAD (SACOS)</th>
-                            <th>ESTATUS</th>
-                            <th id="thOperaciones">ACCION</th>             
+                            <th>ACTIVAR</th>
+                            <th>PANADERIA</th>
+                            <th>ASIGNACION (Sacos)</th>
+                            <th>ULTIMO DESPACHO</th>
+                            <th>FRECUENCIA (Dias)</th>
+                            <th>ESTATUS</th>  
+                            <th>CANTIDAD</th>             
                         </tr>
                     </thead>
                     <tbody></tbody>
                     <tfoot>
                         <tr>
-                            <th>DISTRIBUIDORA</th>
-                            <th>PRODUCTO</th>
-                            <th>CANTIDAD (SACOS)</th>
-                            <th>ESTATUS</th>
-                            <th id="thOperaciones">ACCION</th>             
+                            <th>ACTIVAR</th>
+                            <th>PANADERIA</th>
+                            <th>ASIGNACION (Sacos)</th>
+                            <th>ULTIMO DESPACHO</th>
+                            <th>FRECUENCIA (Dias)</th>
+                            <th>ESTATUS</th>  
+                            <th>CANTIDAD</th>             
                         </tr>
                     </tfoot>
                 </table>
@@ -34,4 +38,5 @@
 
 @section('footer-M2')
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" id="btnPanaderiaUpdate">PROCESAR</button>
 @endsection

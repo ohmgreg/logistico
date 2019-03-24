@@ -56,7 +56,7 @@
         var elemTbody = document.querySelector("#" + a + " tbody");
         $(elem).dataTable().fnDestroy();
         $(elemTbody).html(b);
-        $(elem).DataTable({
+        return $(elem).DataTable({
             "destroy": true,
             "language": lenguaje_espanol
         });

@@ -5,4 +5,7 @@ namespace App\Traits;
 trait BakeriesTrais
 {
 
+
+
+    
 }

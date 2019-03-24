@@ -4,8 +4,8 @@ N(".preload").nodeRemove(function(){
 		var d = new Date();
 		d.setDate(d.getDate() - 1);
 		$('.datepicker').datepicker({language: 'es', startDate: d});
-		LoadFunctions._ListResponsibleOrderofOperations("cmb-responsable");
-		LoadFunctions._DistributionOrderList("cmb-OrdenOperacion");
 		LoadFunctions._listOrderOfOperation();
+		LoadFunctions._ListResponsibleOrderofOperations("cmb-responsable");
+		LoadFunctions._DistributionOrderList("cmb-OrdenOperacion");		
 	}, 200)
 }, 200);

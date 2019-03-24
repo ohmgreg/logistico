@@ -37,4 +37,8 @@ class OrdenDeOperacionesController extends Controller
     public function _DistributionOrderList(){
         return $this->DistributionOrderList();
     }
+
+    public function _AsigClientOrderofOperations(){
+        return $this->AsigClientOrderofOperations();
+    }
 }

@@ -7,6 +7,8 @@ use App\logistpanaderiaordenoperacionesasignaresponsables;
 use App\logistpanaderiaordenoperacionesresponsables;
 use App\LogistConfig;
 use App\LogistPanaderiaDistribucionOrden;
+use App\LogistPanaderiaOrdenOperacionesAsignacion;
+use App\LogistPanaderiaOrdenOperacionesAsignacionDetalle;
 use Carbon\Carbon;
 
 
@@ -99,6 +101,32 @@ public function DistributionOrderList(){
     return LogistPanaderiaDistribucionOrden::all();
 }
 
+public function AsigClientOrderofOperations(){
+
+    $sql_string = "SELECT
+    logistpanaderiacliente.id,
+    logistpanaderiacliente.NombrePanaderia,
+    logistpanaderiaproductos.nombre,
+    logistpanaderiaclienteasignacion.cantidad,
+    logistpanaderiacliente.frecuencia,
+    logistpanaderiacliente.UltimoDespacho,
+    logistpanaderiacliente.suspendido,
+    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) as diastranscurridos 
+    FROM
+    logistpanaderiacliente
+    INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
+    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id";
+
+    return DB::select($sql_string);
+
+
+}
+
+public function DispatchAssignmentInOrderOfOperations($data){
+
+    // $id_detalle = LogistPanaderiaOrdenOperacionesAsignacionDetalle::cretae([])
+
+}
 
 
 // fin del trait

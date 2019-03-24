@@ -74,7 +74,6 @@
 
     WinFunc._listOrderOfOperation = function(data){
         Ajax("_listOrderOfOperation", LoadVars, function(data){
-            console.log(data)
             var strTd = "";
             for(var i = 0; i < data.length; i++){                
                 strTd += '<tr>';
@@ -82,7 +81,6 @@
                 strTd += isNull(data[i]["fechainicio"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["fechainicio"] + " - " + data[i]["fechafin"] + '</td>';
                 strTd += isNull(data[i]["nombre"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["nombre"] +'</td>';
                 strTd += isNull(data[i]["telefono"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["telefono"] +'</td>';
-                // strTd += data[i]["activo"] == 0 ? '<td>NO</td>' : '<td>SI</td>';
                 strTd += '<td style="text-align: left;">';
                 if(data[i]["activo"] == 0){
                     // strTd += '<button type="button" data-toggle="tooltip" title="ACTIVAR ORDEN DE OPERACION" class="btn btn-primary btn-flat" id="btn_swOrdenActiva"><i class="fa fa-check" id =' + data[i]["id"] + '></i></button>';
@@ -100,11 +98,7 @@
     }
     
     WinFunc._ShowDettalle = function(){
-        $('#ModalWidth').css("width","70%");
-        LoadFunctions._listSilo("cmb-silo");
-        LoadFunctions._listDistribuidora("cmb-distribuidora");
-        LoadFunctions._listproducts("cmb-producto");
-        $("#HeadingId").html("ORDEN DE DISTRIBUCION " + LoadVars.name_OrdenDistrib);
+        $('#ModalWidth').css("width","80%");
         $('#M-Insert-2').modal('show');
     }
 
@@ -138,21 +132,52 @@
         })
     }
 
-    WinFunc._DetaleDistributionOrder = function(data){
-        Ajax("_DetaleDistributionOrder", LoadVars, function(data){
+    WinFunc._AsigClientOrderofOperations = function(data){
+        Ajax("_AsigClientOrderofOperations", LoadVars, function(data){
+            console.log(data)
             var strTd = "";
             for(var i = 0; i < data.length; i++){                
-                strTd += '<tr>';                
-                strTd += isNull(data[i]["NameDistribuidora"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["NameDistribuidora"] + '</td>';
-                strTd += isNull(data[i]["NameProducto"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["NameProducto"] + '</td>';
+                strTd += '<tr>';
+                if(data[i]["diastranscurridos"] <= 0){
+                    strTd += '<td>';
+                    strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + i + '" id="sw_' + i + '" autocomplete="off" class="sw_"/>';
+                    strTd += '<div class="[ btn-group ]"><label for="sw_' + i + '" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
+                    strTd += '</td>';
+                }else{
+                    strTd += '<td></td>';
+                }
+                strTd += isNull(data[i]["NombrePanaderia"]) ? '<td></td>' : '<td style="text-align: left;">' + data[i]["NombrePanaderia"] + '</td>';
                 strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] + '</td>';
-                strTd += data[i]["status"] == 0 ? '<td>EN TRANSITO</td>' : '<td>EN ALMACEN</td>';
+                strTd += isNull(data[i]["UltimoDespacho"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["UltimoDespacho"] + '</td>';
+                strTd += isNull(data[i]["frecuencia"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["frecuencia"] + '</td>';
+                var status = data[i]["suspendido"] == 0 ? "ACTIVO" : "SUSPENDIDO";
+                strTd += '<td style="text-align: center;">' + status + '</td>';                
                 strTd += '<td style="text-align: center;">';
-                strTd += '<button type="button" data-toggle="tooltip" title="ELIMINAR DETALLE" class="btn btn-danger btn-flat" id="btn_DetalleDelete"><i class="fa fa-trash-o" id =' + data[i]["id"] + '></i></button>';
+                strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + i + '" disabled="">';
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
-            defineDataTable("tableOrdenDistribucionDetalle", strTd);
+            LoadVars.tablePanaderias = defineDataTable("tableOrdenDistribucionDetalle", strTd);
         })
-    } 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 })(window);

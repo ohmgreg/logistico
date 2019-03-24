@@ -60,6 +60,10 @@ route::post('_ListResponsibleOrderofOperations',   'OrdenDeOperacionesController
 route::post('_AddOrderOfOperation',   'OrdenDeOperacionesController@_AddOrderOfOperation');
 route::post('_listOrderOfOperation',   'OrdenDeOperacionesController@_listOrderOfOperation');
 route::post('_DistributionOrderList',     'OrdenDeOperacionesController@_DistributionOrderList');
+route::post('_AsigClientOrderofOperations',     'OrdenDeOperacionesController@_AsigClientOrderofOperations');
+
+
+
 
 
 route::post('_AddDistributionOrder',        'OrdenDistribucionController@_AddDistributionOrder');
