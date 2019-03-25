@@ -22,7 +22,6 @@ class OrdenDistribucionController extends Controller
     }
 
     public function _AddDistributionOrder(Request $data){
-
         return $this->AddDistributionOrder($data);
     }
 

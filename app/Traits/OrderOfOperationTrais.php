@@ -102,7 +102,7 @@ public function DistributionOrderList(){
     return LogistPanaderiaDistribucionOrden::all();
 }
 
-public function AsigClientOrderofOperations(){
+public function AsigClientOrderofOperations($data){
 
     $sql_string = "SELECT
     logistpanaderiacliente.id,
@@ -112,11 +112,13 @@ public function AsigClientOrderofOperations(){
     logistpanaderiacliente.frecuencia,
     logistpanaderiacliente.UltimoDespacho,
     logistpanaderiacliente.suspendido,
-    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) as diastranscurridos 
-    FROM
+    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) as diastranscurridos
+FROM
     logistpanaderiacliente
     INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
-    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id";
+    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
+WHERE
+logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
 
     return DB::select($sql_string);
 }
