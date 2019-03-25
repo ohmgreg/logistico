@@ -23,10 +23,12 @@
 
     $("#cmb-distribuidora").change(function(){
         LoadVars.id_Distribuidora = $(this).val();
+        LoadFunctions._AsigClientOrderofOperations(LoadVars);
     });
 
     $("#cmb-OrdenOperacion").change(function(){        
         LoadVars.id_OrdenDistribucion = $(this).val();
+        
     });
 
     $("#cmb-producto").change(function(){
@@ -62,7 +64,7 @@
 
     $("#tableOrdenDistribucion").on("click", "#btn_DetalleAdd", function(){
         LoadVars.id_OrdendeOperacion = $(this)[0].firstChild.id;
-        LoadFunctions._AsigClientOrderofOperations(LoadVars);
+        LoadFunctions._listDistribuidora("cmb-distribuidora");
         LoadFunctions._ShowDettalle();
     });
 
@@ -113,7 +115,6 @@
             $(InputSelect).prop('disabled', true);
             $(InputSelect).val("");
         }
-        console.log(txtAsignacion)
     } );
 
 

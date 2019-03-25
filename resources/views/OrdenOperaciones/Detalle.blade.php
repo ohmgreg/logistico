@@ -1,5 +1,18 @@
 @extends('Modals.M-Insert-2')
 @section('content-M2')
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="HeadingId">DISTRIBUIDORAS</div>
+            <div class="modal-body">
+                <form action="" id="FormOrdenDetalle">                    
+                    <div><label>SELECCIONE UNA DISTRIBUIDORA</label><select id='cmb-distribuidora' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12 col-md-offset-0">
         <div class="panel panel-default">

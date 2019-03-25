@@ -134,14 +134,13 @@
 
     WinFunc._AsigClientOrderofOperations = function(data){
         Ajax("_AsigClientOrderofOperations", LoadVars, function(data){
-            console.log(data)
             var strTd = "";
             for(var i = 0; i < data.length; i++){                
                 strTd += '<tr>';
                 if(data[i]["diastranscurridos"] <= 0){
                     strTd += '<td>';
                     strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + i + '" id="sw_' + i + '" autocomplete="off" class="sw_"/>';
-                    strTd += '<div class="[ btn-group ]"><label for="sw_' + i + '" class="[ btn btn-default ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
+                    strTd += '<div class="[ btn-group ]"><label for="sw_' + i + '" class="[ btn btn-primary ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
                     strTd += '</td>';
                 }else{
                     strTd += '<td></td>';
@@ -157,7 +156,7 @@
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
-            LoadVars.tablePanaderias = defineDataTable("tableOrdenDistribucionDetalle", strTd);
+            defineDataTable("tableOrdenDistribucionDetalle", strTd);
         })
     }
 
