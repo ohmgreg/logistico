@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\traits\DistributionOrderTrait;
-use App\traits\DistributorTraits;
+use App\Traits\DistributionOrderTrait;
+use App\Traits\DistributorTraits;
 
 class OrdenDistribucionController extends Controller
 
