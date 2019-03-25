@@ -41,4 +41,10 @@ class OrdenDeOperacionesController extends Controller
     public function _AsigClientOrderofOperations(Request $data){
         return $this->AsigClientOrderofOperations($data);
     }
+
+    public function _existenciadistribuidora(Request $data){
+        return $this->existenciadistribuidora($data);
+        
+    }
+    
 }
