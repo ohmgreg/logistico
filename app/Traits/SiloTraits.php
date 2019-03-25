@@ -5,7 +5,7 @@ namespace App\traits;
 use DB;
 use App\LogistPanaderiaSilo;
 use App\LogistPanaderiaSiloAlmacen;
-use App\LogistPanaderiaSiloAlmacenIncorporacion;
+use App\logistpanaderiasiloalmacenincorporacion;
 use App\logistConfig;
 
 trait SiloTraits
@@ -19,26 +19,26 @@ trait SiloTraits
 
     public function listSiloRecarga($data)
     {   
-        // return LogistPanaderiaSiloAlmacenIncorporacion::where('id_Silo', $data->id_Silo)->get();
+        // return logistpanaderiasiloalmacenincorporacion::where('id_Silo', $data->id_Silo)->get();
         $sql_string = "SELECT
-        LogistPanaderiaSiloAlmacenIncorporacion.id,
-        LogistPanaderiaSiloAlmacenIncorporacion.cod_recarga,
-        LogistPanaderiaSiloAlmacenIncorporacion.id_Silo,
-        LogistPanaderiaSiloAlmacenIncorporacion.id_producto,
-        LogistPanaderiaSiloAlmacenIncorporacion.fecha,
-        LogistPanaderiaSiloAlmacenIncorporacion.cantidad,
-        LogistPanaderiaSiloAlmacenIncorporacion.manufactura,
-        LogistPanaderiaSiloAlmacenIncorporacion.existencia,
-        LogistPanaderiaSiloAlmacenIncorporacion.merma,
-        LogistPanaderiaSiloAlmacenIncorporacion.nota,
-        LogistPanaderiaSiloAlmacenIncorporacion.created_at,
-        LogistPanaderiaSiloAlmacenIncorporacion.updated_at,
+        logistpanaderiasiloalmacenincorporacion.id,
+        logistpanaderiasiloalmacenincorporacion.cod_recarga,
+        logistpanaderiasiloalmacenincorporacion.id_Silo,
+        logistpanaderiasiloalmacenincorporacion.id_producto,
+        logistpanaderiasiloalmacenincorporacion.fecha,
+        logistpanaderiasiloalmacenincorporacion.cantidad,
+        logistpanaderiasiloalmacenincorporacion.manufactura,
+        logistpanaderiasiloalmacenincorporacion.existencia,
+        logistpanaderiasiloalmacenincorporacion.merma,
+        logistpanaderiasiloalmacenincorporacion.nota,
+        logistpanaderiasiloalmacenincorporacion.created_at,
+        logistpanaderiasiloalmacenincorporacion.updated_at,
         LogistPanaderiaProductos.nombre
         FROM
-        LogistPanaderiaSiloAlmacenIncorporacion
-        INNER JOIN LogistPanaderiaProductos ON LogistPanaderiaSiloAlmacenIncorporacion.id_producto = LogistPanaderiaProductos.id
+        logistpanaderiasiloalmacenincorporacion
+        INNER JOIN LogistPanaderiaProductos ON logistpanaderiasiloalmacenincorporacion.id_producto = LogistPanaderiaProductos.id
         WHERE
-        LogistPanaderiaSiloAlmacenIncorporacion.id_Silo = 1";
+        logistpanaderiasiloalmacenincorporacion.id_Silo = 1";
         return DB::select($sql_string);
 
     }
@@ -50,7 +50,7 @@ trait SiloTraits
 
     public function ShowMerma($data)
     {
-        return LogistPanaderiaSiloAlmacenIncorporacion::where('id', $data->id_incorporacion)->get();
+        return logistpanaderiasiloalmacenincorporacion::where('id', $data->id_incorporacion)->get();
     }
 
     public function AddProductSilo($data)
@@ -63,7 +63,7 @@ trait SiloTraits
         if ((strlen(strval($data['id_Silo']))) == 2) {$silo_str = '00'. strval($count_recarga);}  
         $cod_recarga = $silo_str .'*'.$lafecha . '*' .$count_recarga_str;
 
-        LogistPanaderiaSiloAlmacenIncorporacion::create([
+        logistpanaderiasiloalmacenincorporacion::create([
             'fecha' => $data['fecha'],
             'cantidad' => $data['cantidad'],
             'nota' => $data['nota'],
@@ -94,7 +94,7 @@ trait SiloTraits
 
     public function updateMerma($data){
 
-        LogistPanaderiaSiloAlmacenIncorporacion::where('id',$data['id_incorporacion'])
+        logistpanaderiasiloalmacenincorporacion::where('id',$data['id_incorporacion'])
         ->update([
                 'merma'=>$data['merma']
         ]);
@@ -108,7 +108,7 @@ trait SiloTraits
     }
 
     public function updateManufactura($data){
-        LogistPanaderiaSiloAlmacenIncorporacion::where('id',$data['id_incorporacion'])
+        logistpanaderiasiloalmacenincorporacion::where('id',$data['id_incorporacion'])
         ->update([
                 'manufactura'=>$data['manufactura'],
                 'existencia'=>$data['manufactura']
@@ -123,12 +123,12 @@ trait SiloTraits
     }
 
     public function ExistenceOfSilo($data){
-        return LogistPanaderiaSiloAlmacenIncorporacion::where('id_Silo', $data->id_Silo)->where('existencia','>',0)->sum('existencia');
+        return logistpanaderiasiloalmacenincorporacion::where('id_Silo', $data->id_Silo)->where('existencia','>',0)->sum('existencia');
    }
 
    public function DiscountExistenceOfTheSilo($data){
 
-    $ArrayExisencia = LogistPanaderiaSiloAlmacenIncorporacion::where('existencia','>','0')
+    $ArrayExisencia = logistpanaderiasiloalmacenincorporacion::where('existencia','>','0')
     ->where('id_Silo',$data->id_Silo)->orderBy('id', 'asc')->get();
 
 
@@ -140,7 +140,7 @@ trait SiloTraits
         $id = $ArrayExisencia[$i]->id;
         $residuo = $techo - $existencia;
         if($residuo > 0){
-            LogistPanaderiaSiloAlmacenIncorporacion::where('id','=',$id)->update([
+            logistpanaderiasiloalmacenincorporacion::where('id','=',$id)->update([
                 'existencia' => 0,
             ]);
             $techo = $residuo;
@@ -148,7 +148,7 @@ trait SiloTraits
         } else {
             $resto = $existencia - $techo;
             $techo = 0;
-            LogistPanaderiaSiloAlmacenIncorporacion::where('id','=',$id)->update([
+            logistpanaderiasiloalmacenincorporacion::where('id','=',$id)->update([
                 'existencia' => $resto,
             ]);
         }       
