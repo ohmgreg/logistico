@@ -3,12 +3,12 @@
 namespace App\Traits;
 
 use DB;
-use App\LogistPanaderiaProductos;
+use App\logistpanaderiaproductos;
 
 
 trait ProductTraits
 {
  public function listproducts(){
-    return LogistPanaderiaProductos::all();
+    return logistpanaderiaproductos::all();
  }
 }

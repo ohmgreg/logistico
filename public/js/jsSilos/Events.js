@@ -1,13 +1,5 @@
 ;(function(win){
 
-    N("#txt_SiloObservacion").click(function(){
-        LoadVars.id_Silo = 1;
-        Ajax("_DiscountExistenceOfTheSilo", LoadVars, function(data){
-            console.log(data);
-        })       
-    });
-
-
     $('#aTree').click(function(){
         var ulMenu = $(this).parent().children('ul').get(0)
         $(ulMenu).slideToggle("slow");

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\traits;
-
 use DB;
 use App\LogistPanaderiaSilo;
 use App\LogistPanaderiaSiloAlmacen;
@@ -33,10 +32,10 @@ trait SiloTraits
         logistpanaderiasiloalmacenincorporacion.nota,
         logistpanaderiasiloalmacenincorporacion.created_at,
         logistpanaderiasiloalmacenincorporacion.updated_at,
-        LogistPanaderiaProductos.nombre
+        logistpanaderiaproductos.nombre
         FROM
         logistpanaderiasiloalmacenincorporacion
-        INNER JOIN LogistPanaderiaProductos ON logistpanaderiasiloalmacenincorporacion.id_producto = LogistPanaderiaProductos.id
+        INNER JOIN logistpanaderiaproductos ON logistpanaderiasiloalmacenincorporacion.id_producto = logistpanaderiaproductos.id
         WHERE
         logistpanaderiasiloalmacenincorporacion.id_Silo = 1";
         return DB::select($sql_string);
