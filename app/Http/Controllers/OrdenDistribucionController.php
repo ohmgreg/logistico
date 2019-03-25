@@ -34,4 +34,17 @@ class OrdenDistribucionController extends Controller
     public function _DelWarehouseDistributor(Request $data){
         return $this->DelWarehouseDistributor($data);
     }
+
+    public function _DiscountExistenceOfTheWherehause(Request $data){
+        
+        $a = count($data);
+        $i = 0;
+        // while ($techo > 0) {
+        return $this->DiscountExistenceOfTheWherehause($data);
+    }
+
+    public function _existenciadistribuidora(Request $data){
+        return $this->existenciadistribuidora($data);
+    }
+    
 }

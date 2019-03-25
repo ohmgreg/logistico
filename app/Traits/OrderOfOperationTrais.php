@@ -9,6 +9,7 @@ use App\LogistConfig;
 use App\LogistPanaderiaDistribucionOrden;
 use App\LogistPanaderiaOrdenOperacionesAsignacion;
 use App\LogistPanaderiaOrdenOperacionesAsignacionDetalle;
+use App\logistpanaderiadistribuidoraalmacen;
 use Carbon\Carbon;
 
 
@@ -118,51 +119,88 @@ public function AsigClientOrderofOperations(){
     INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id";
 
     return DB::select($sql_string);
-
-
 }
 
-public function DispatchAssignmentInOrderOfOperations($data){
+public function DiscountExistenceOfTheWherehause($data){
 
-
-    $id_OrdenOperacionesAsignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
+    $date = Carbon::now();
+    $date = $date->format('d-m-Y');
+    $asignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
+      
         'id_OrdenDeOperaciones' => $data->id_OrdenDeOperaciones,
-        'id_panadera' => $data->id_OrdenDeOperaciones,
-        'fechaAsignacion' => $data->fechaAsignacion,
-        'pesoTN' => ($data->cantidad * 50)/1000
+        'id_panadera' => $data->id_panadera,
+        'fechaAsignacion' => $date, //carbobo
+        'PesoTN' => ($data->cantidad * 50)/1000,
     ]);
 
+    $ArrayExisencia = logistpanaderiadistribuidoraalmacen::where('existencia','>','0')
+    ->where('id_Distribuidora',$data->id_Distribuidora)->orderBy('id', 'asc')->get();
+
+    $techo = $data->cantidad;
+    $i = 0;
+     while ($techo > 0) {
+        $existencia = $ArrayExisencia[$i]->existencia;
+        $id = $ArrayExisencia[$i]->id;
+        $residuo = $techo - $existencia;
+        if($residuo > 0){
+            logistpanaderiadistribuidoraalmacen::where('id','=',$id)->update([
+                'existencia' => 0,
+            ]);
+
+            logistpanaderiaordenoperacionesasignaciondetalle::create([
+                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdenDistribucion,
+                'id_Distribuidora' => $ArrayExisencia[$i]->Distribuidora,
+                'id_producto' => $data->id_Producto,
+                'cantidad' => $ArrayExisencia[$i]->existencia,
+                'id_OrdenOperacionesAsignacion' => $asignacion->id,
+                'costo' => $ArrayExisencia[$i]->preciocompra,
+                'precio' => $ArrayExisencia[$i]->precioventa,
+                'id_alamcenDistribucion' => $ArrayExisencia[$i]->id,
+            ]);
 
 
+            $techo = $residuo;
+            $i = $i + 1;
+        } else {
+            $resto = $existencia - $techo;
+            $techo = 0;
+            logistpanaderiadistribuidoraalmacen::where('id','=',$id)->update([
+                'existencia' => $resto,
+            ]);
 
+            logistpanaderiaordenoperacionesasignaciondetalle::create([
+                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdenDistribucion,
+                'id_Distribuidora' => $ArrayExisencia[$i]->Distribuidora,
+                'id_producto' => $data->id_Producto,
+                'cantidad' => $techo,
+                'id_OrdenOperacionesAsignacion' => $asignacion->id,
+                'costo' => $ArrayExisencia[$i]->preciocompra,
+                'precio' => $ArrayExisencia[$i]->precioventa,
+                'id_alamcenDistribucion' => $ArrayExisencia[$i]->id,
+            ]);
+        }              
+     }
+     return 1;
+   }
 
+   public function existenciadistribuidora(){
 
-
-
-
-
-
-
+    $sql_string = "SELECT
+    logistpanaderiadistribuidoraalmacen.id_Distribuidora,
+    logistpanaderiadistribuidoraalmacen.id_producto,
+    Sum(logistpanaderiadistribuidoraalmacen.existencia) as existencia
+    FROM
+    logistpanaderiadistribuidoraalmacen
+    WHERE
+    logistpanaderiadistribuidoraalmacen.id_Distribuidora = " . $data->id_Distribuidora . "
+    GROUP BY
+    logistpanaderiadistribuidoraalmacen.id_Distribuidora,
+    logistpanaderiadistribuidoraalmacen.id_producto";
+    return DB::select($sql_string);
     
+   }
 
-    return LogistPanaderiaOrdenOperacionesAsignacionDetalle::cretae([
 
-
-        // 'id_OrdenDistribucion'
-        // 'id_Distribuidora' => $data->distribuidora,
-        // 'id_producto' =>
-        // 'cantidad' =>
-        // 'id_OrdenTransporte' =>
-        // 'id_OrdenOperacionesAsignacion' => $id_OrdenOperacionesAsignacion,
-        // 'costo' =>
-        // 'precio' =>
-        // 'id_alamcenDistribucion' =>
-
-        
-
-    ]);
-
-}
 
 
 // fin del trait
