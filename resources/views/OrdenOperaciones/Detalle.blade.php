@@ -18,9 +18,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">PANADERIAS A DESPACHAR</div>
             <div class="panel-body">
+                <div id="panaderiaCantidad"><p></p></div>
                 <table id="tableOrdenDistribucionDetalle" class="table" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ITEM</th>
                             <th>ACTIVAR</th>
                             <th>PANADERIA</th>
                             <th>ASIGNACION (Sacos)</th>
@@ -33,6 +35,7 @@
                     <tbody></tbody>
                     <tfoot>
                         <tr>
+                            <th>ITEM</th>
                             <th>ACTIVAR</th>
                             <th>PANADERIA</th>
                             <th>ASIGNACION (Sacos)</th>

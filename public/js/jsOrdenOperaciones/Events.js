@@ -1,4 +1,6 @@
 ;(function(win){
+    var swCountCell;
+
     $('#aTree').click(function(){
         var ulMenu = $(this).parent().children('ul').get(0)
         $(ulMenu).slideToggle("slow");
@@ -23,6 +25,7 @@
 
     $("#cmb-distribuidora").change(function(){
         LoadVars.id_Distribuidora = $(this).val();
+        LoadFunctions._existenciadistribuidora(LoadVars);   
         LoadFunctions._AsigClientOrderofOperations(LoadVars);
     });
 
@@ -101,21 +104,61 @@
     });
 
     N("#btnPanaderiaUpdate").click(function(){
-        console.log(LoadVars.tablePanaderias.rows().data());
+        LoadFunctions.DiscountExistenceOfTheWherehause(LoadVars);
     });
 
     $('#tableOrdenDistribucionDetalle tbody').on( 'click', '.sw_', function () {
         var fila = $(this).closest('tr').index();
-        var InputSelect = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].childNodes[0];
-        var txtAsignacion = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(2).text();
+        var InputSelect = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].childNodes[0];
+        var txtAsignacion = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(3).text();
         if ($(this).prop('checked')) {
             $(InputSelect).prop('disabled', false);
             $(InputSelect).val(txtAsignacion);
         }else{
             $(InputSelect).prop('disabled', true);
             $(InputSelect).val("");
+            $($(this).closest('tr')[0]).css("background-color","white");
+            $($(this).closest('tr')[0]).css("color","black");
         }
     } );
+
+    N("#btnPanaderiaUpdate").click(function(){
+        LoadFunctions._existenciadistribuidora(LoadVars);        
+    });
+
+    $("#tableOrdenDistribucionDetalle").on("keyup", ".ctrUpdate1", function(){
+        var fila = $(this).closest('tr').index();
+        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad}; 
+        if(LoadVars.InputPanaderiaCantidad !== ""){
+            swCountCell = checkInt(LoadVars.InputPanaderiaCantidad, LoadVars.id_TablePanaderia, this);
+        }
+        var a = 0;
+        LoadVars.ArrayPanaderia.forEach(function(element, index){
+            if(element.val !== ""){
+                console.log(/^([0-9]{1,6})$/.test(element.val))
+                a += /^([0-9]{1,6})$/.test(element.val) ? parseInt(element.val, 10) : 0
+            }
+        });
+        LoadVars.Pedido = a;
+        console.log(a);
+    });
+
+    $("#tableOrdenDistribucionDetalle").on("click", ".sw_", function(){
+        var fila = $(this).closest('tr').index();
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
+        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad};
+        var a = 0;
+        LoadVars.ArrayPanaderia.forEach(function(element){
+            if(element.val !== ""){
+                a += parseInt(element.val, 10);
+            }
+        }); 
+        LoadVars.Pedido = a;
+        console.log(a);
+    });
 
 
 })(window);

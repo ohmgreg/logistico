@@ -185,3 +185,10 @@ b, strong{
     color: white !important;
     border-color: #222d32 !important;
 }
+
+#panaderiaCantidad p{
+    text-align: center;
+    font-size: 25px;
+    margin: 10px;
+    color: green;
+}

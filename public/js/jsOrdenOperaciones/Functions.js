@@ -1,6 +1,9 @@
 ;(function(win){
     var WinFunc = window.LoadFunctions = Logist.OrdenDistribucion = {};
     win.LoadVars = Logist.OrdenDistribucion.vars = {};
+    var TableOrdenPanaderia;
+    LoadVars.ArrayPanaderia = [];
+
 
     WinFunc._listSilo = function(idSelect){
         var str_opcion = '<option value="" disabled selected>SELECCIONE UNA OPCIÓN</option>';
@@ -132,11 +135,20 @@
         })
     }
 
+    WinFunc._existenciadistribuidora = function(data){
+        Ajax("_existenciadistribuidora", LoadVars, function(data){
+            LoadVars.id_producto = data[0].id_producto;
+            LoadVars.existencia = data[0].existencia;
+            $("#panaderiaCantidad p")[0].innerText = "CANTIDAD EN EXISTENCIA: " + LoadVars.existencia + " SACOS";
+        })
+    }
+
     WinFunc._AsigClientOrderofOperations = function(data){
         Ajax("_AsigClientOrderofOperations", LoadVars, function(data){
             var strTd = "";
             for(var i = 0; i < data.length; i++){                
                 strTd += '<tr>';
+                strTd += '<td>' + (i + 1) + '</td>';
                 if(data[i]["diastranscurridos"] <= 0){
                     strTd += '<td>';
                     strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + i + '" id="sw_' + i + '" autocomplete="off" class="sw_"/>';
@@ -156,8 +168,19 @@
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
-            defineDataTable("tableOrdenDistribucionDetalle", strTd);
+
+            $("#tableOrdenDistribucionDetalle").dataTable().fnDestroy();
+            $("#tableOrdenDistribucionDetalle tbody").html(strTd);
+            TableOrdenPanaderia = $("#tableOrdenDistribucionDetalle").DataTable({
+                "pageLength": 5,
+                "destroy": true,
+                "language": lenguaje_espanol
+            });
         })
+    }
+
+    WinFunc.DiscountExistenceOfTheWherehause  = function(){
+        console.log(TableOrdenPanaderia.data());
     }
 
 

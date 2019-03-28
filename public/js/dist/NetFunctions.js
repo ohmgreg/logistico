@@ -85,6 +85,19 @@
         return sw;
     };
 
+    window.checkInt = function(a, b, c){
+        var sw = true;
+        if(!/^[0-9]$/.test(a)){
+            Notify("FORMATO DEL ITEM: " + b + " NO ESTA PERMITIDO", "danger");
+            $($(c).closest('tr')[0]).css("background-color","red");
+            $($(c).closest('tr')[0]).css("color","white");
+            sw = false;
+        }else{
+            $($(c).closest('tr')[0]).css("background-color","white");
+        }        
+        return sw;
+    };
+
     win.NewDate = function(a){
         var year = a.substr(6, 4);
         var mes = a.substr(3, 1) == 0 ? a.substr(4, 1) : a.substr(3, 2);

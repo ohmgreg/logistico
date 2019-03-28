@@ -185,7 +185,7 @@ public function DiscountExistenceOfTheWherehause($data){
      return 1;
    }
 
-   public function existenciadistribuidora(){
+   public function existenciadistribuidora($data){
 
     $sql_string = "SELECT
     logistpanaderiadistribuidoraalmacen.id_Distribuidora,
