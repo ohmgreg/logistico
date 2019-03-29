@@ -54,4 +54,5 @@
 
 @section('footer-M2')
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" id="btnPanaderiaUpdate">PROCESAR</button>
 @endsection

@@ -47,10 +47,15 @@ class OrdenDeOperacionesController extends Controller
         
     }
 
-    public function _DiscountExistenceOfTheWherehause(Request $data){
-        for ($i=0; $i < count($data -> ArrayPanaderiaDef); $i++) { 
-            return $this->DiscountExistenceOfTheWherehause($data -> ArrayPanaderiaDef[$i]);
-        }        
+    public function _DiscountExistenceOfTheWherehause(Request $data, $index = 0){
+        if($index < count($data -> ArrayPanaderiaDef)){             
+            $jj = $this->DiscountExistenceOfTheWherehause($data -> ArrayPanaderiaDef[$index]);
+            if($jj == 1){
+                $index++;
+                $this->_DiscountExistenceOfTheWherehause($data, $index);
+            }            
+        }
+        return 1;        
     }
     
 }

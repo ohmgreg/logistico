@@ -3,7 +3,6 @@
     win.LoadVars = Logist.OrdenDistribucion.vars = {};
     var TableOrdenPanaderia;
     LoadVars.ArrayPanaderia = [];
-    LoadVars.ArrayAsociado = [];
 
 
     WinFunc._listSilo = function(idSelect){
@@ -147,30 +146,17 @@
     WinFunc._AsigClientOrderofOperations = function(data){
         Ajax("_AsigClientOrderofOperations", LoadVars, function(data){
             var strTd = "";
-            for(var i = 0; i < data.length; i++){
-                LoadVars.id_ClienteAsignacion = data[i]["id_ClienteAsignacion"];
-                LoadVars.ArrayAsociado[data[i]["idpanaderiagreg"]] = data[i]["id_asociado"];
-                LoadVars.id_OrdenOperacionesAsignacion = data[i]["id_OrdenOperacionesAsignacion"];                 
+            for(var i = 0; i < data.length; i++){                
                 strTd += '<tr>';
                 strTd += '<td>' + (i + 1) + '</td>';
-                strTd += '<td>';
-                if(data[i]["id_OrdenOperacionesAsignacion"] == null){                    
-                    strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + data[i]["idpanaderiagreg"] + '" id="sw_' + data[i]["idpanaderiagreg"] + '" autocomplete="off" class="sw_"/>';
-                    strTd += '<div class="[ btn-group ]"><label for="sw_' + data[i]["idpanaderiagreg"] + '" class="[ btn btn-primary ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
+                if(data[i]["diastranscurridos"] <= 0){
+                    strTd += '<td>';
+                    strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + i + '" id="sw_' + i + '" autocomplete="off" class="sw_"/>';
+                    strTd += '<div class="[ btn-group ]"><label for="sw_' + i + '" class="[ btn btn-primary ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
+                    strTd += '</td>';
                 }else{
-                    var id_Pana = parseInt(data[i]["idpanaderiagreg"], 10);
-                    LoadVars.ArrayPanaderia[id_Pana] = {
-                        id_Panaderia: id_Pana,
-                        id_Asociado: LoadVars.ArrayAsociado[id_Pana],
-                        id_Producto: LoadVars.id_producto, 
-                        id_Distribuidora: LoadVars.id_Distribuidora, 
-                        id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
-                        val: data[i]["cantidad"]
-                    };
-                    strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + data[i]["idpanaderiagreg"] + '" id="sw_' + data[i]["idpanaderiagreg"] + '" autocomplete="off" class="sw_" checked/>';
-                    strTd += '<div class="[ btn-group ]"><label for="sw_' + data[i]["idpanaderiagreg"] + '" class="[ btn btn-primary ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
+                    strTd += '<td></td>';
                 }
-                strTd += '</td>';
                 strTd += isNull(data[i]["NombrePanaderia"]) ? '<td></td>' : '<td style="text-align: left;">' + data[i]["NombrePanaderia"] + '</td>';
                 strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] + '</td>';     
                 strTd += isNull(data[i]["UltimoDespacho"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["UltimoDespacho"] + '</td>';                
@@ -178,11 +164,7 @@
                 var status = data[i]["suspendido"] == 0 ? "ACTIVO" : "SUSPENDIDO";
                 strTd += '<td style="text-align: center;">' + status + '</td>';                
                 strTd += '<td style="text-align: center;">';
-                if(data[i]["id_OrdenOperacionesAsignacion"] !== null){                    
-                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" value ="' + data[i]["cantidad"] + '"placeholder="" id="txt_' + i + '" >';                    
-                }else{
-                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + i + '" disabled>';
-                }
+                strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + i + '" disabled="">';
                 strTd += '</td>';
                 strTd += '</tr>';            
             }
@@ -198,7 +180,6 @@
     }
 
     WinFunc._DiscountExistenceOfTheWherehause = function(data){
-        console.log(LoadVars);
         Ajax("_DiscountExistenceOfTheWherehause", LoadVars, function(data){
             LoadVars.ArrayPanaderia = [];
             LoadVars.ArrayPanaderiaDef = [];

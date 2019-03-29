@@ -49,7 +49,12 @@
 		"jsOrdenOperaciones/Functions.js",
 		"jsOrdenOperaciones/Events.js",		
 		"jsOrdenOperaciones/Init.js"
-	],	
+	],
+	"jsReversoAsignacion":[
+		"jsReversoAsignacion/Functions.js",
+		"jsReversoAsignacion/Events.js",		
+		"jsReversoAsignacion/Init.js"
+	],
 	"cssComun": [
 		"app_.css",
 		"netInit.min.css",

@@ -40,6 +40,10 @@ Route::get('/OrdenOperaciones', function(){
     return view('OrdenOperaciones.Index');
 });
 
+Route::get('/ReversoAsignacion', function(){    
+    return view('ReversoAsignacion.Index');
+});
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 

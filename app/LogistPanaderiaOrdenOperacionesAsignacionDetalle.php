@@ -14,8 +14,10 @@ class LogistPanaderiaOrdenOperacionesAsignacionDetalle extends Model
         'cantidad',
         'id_OrdenTransporte',
         'id_OrdenOperacionesAsignacion',
+        'id_alamcenDistribucion',
+        'id_panaderia',
+        'id_OrdendeOperaciones',
         'costo',
-        'precio',
-        'id_alamcenDistribucion',                
+        'precio',                    
 ];
 }

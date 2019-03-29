@@ -10,11 +10,46 @@ use App\LogistPanaderiaDistribucionOrden;
 use App\LogistPanaderiaOrdenOperacionesAsignacion;
 use App\LogistPanaderiaOrdenOperacionesAsignacionDetalle;
 use App\logistpanaderiadistribuidoraalmacen;
+use App\logistpanaderiaordenoperacionesintegrador;
+use App\logistpanaderiaOrdenOperacionTemp;
 use Carbon\Carbon;
 
 
 trait OrderOfOperationTrais
 {
+
+
+    //Temp Orden Operaciones;
+public function addoptemp($data){
+
+    return logistpanaderiaOrdenOperacionTemp::create([
+        'Cantidad' => $data('Cantidad'),
+        'id_Producto' => $data('id_Producto'),
+        'id_Panaderia' => $data('id_Panaderia'),
+        'id_OrdenOperaciones' => $data('id_OrdenOperaciones'),
+        'id_distribuidora' => $data('id_distribuidora'),
+        'id_asociado' => $data('id_asociado'), 
+    ]);
+
+}
+
+public function deloptemp($data){
+    return logistpanaderiaOrdenOperacionTemp::where('id_OrdenOperaciones', $data->id_OrdenOperaciones)
+    ->delete();
+}
+
+
+
+
+
+    // Fin de la Orden
+
+
+
+
+
+
+
     public function listOrderOfOperation(){       
     $sql_string = "SELECT
     logistpanaderiaordenoperaciones.id,
@@ -34,32 +69,55 @@ trait OrderOfOperationTrais
 }
 
 public function ShowOrderOfOperation($data){
+    // $sql_string = "SELECT
+    // logistpanaderiaordenoperaciones.id,
+    // logistpanaderiaordenoperaciones.fechainicio,
+    // logistpanaderiaordenoperaciones.fechafin,
+    // logistpanaderiaordenoperaciones.codigo,
+    // logistpanaderiaordenoperacionesasignaresponsables.id_OrdenOperaciones,
+    // logistpanaderiaordenoperacionesasignaresponsables.id_Responsable,
+    // logistpanaderiaordenoperacionesresponsables.nombre,
+    // logistpanaderiaordenoperacionesresponsables.telefono,
+    // logistpanaderiaordenoperacionesresponsables.institucion
+    // FROM
+    // logistpanaderiaordenoperacionesasignaresponsables
+    // INNER JOIN logistpanaderiaordenoperacionesresponsables ON logistpanaderiaordenoperacionesresponsables.id = logistpanaderiaordenoperacionesasignaresponsables.id_Responsable
+    // INNER JOIN logistpanaderiaordenoperaciones ON logistpanaderiaordenoperaciones.id = logistpanaderiaordenoperacionesasignaresponsables.id_OrdenOperaciones
+    // WHERE
+    // logistpanaderiaordenoperacionesresponsables.id = " . $data->id_OrdenOperaciones;    
+    // return DB::select($sql_string);
+
     $sql_string = "SELECT
-    logistpanaderiaordenoperaciones.id,
-    logistpanaderiaordenoperaciones.fechainicio,
-    logistpanaderiaordenoperaciones.fechafin,
-    logistpanaderiaordenoperaciones.codigo,
-    logistpanaderiaordenoperacionesasignaresponsables.id_OrdenOperaciones,
-    logistpanaderiaordenoperacionesasignaresponsables.id_Responsable,
-    logistpanaderiaordenoperacionesresponsables.nombre,
-    logistpanaderiaordenoperacionesresponsables.telefono,
-    logistpanaderiaordenoperacionesresponsables.institucion
-    FROM
-    logistpanaderiaordenoperacionesasignaresponsables
-    INNER JOIN logistpanaderiaordenoperacionesresponsables ON logistpanaderiaordenoperacionesresponsables.id = logistpanaderiaordenoperacionesasignaresponsables.id_Responsable
-    INNER JOIN logistpanaderiaordenoperaciones ON logistpanaderiaordenoperaciones.id = logistpanaderiaordenoperacionesasignaresponsables.id_OrdenOperaciones
-    WHERE
-    logistpanaderiaordenoperacionesresponsables.id = " . $data->id_OrdenOperaciones;    
-    return DB::select($sql_string);
+    logistpanaderiacliente.NombrePanaderia,
+    logistpanaderiaproductos.nombre,
+    logistpanaderiaclienteasignacion.cantidad,
+    logistpanaderiacliente.frecuencia,
+    logistpanaderiacliente.UltimoDespacho,
+    logistpanaderiacliente.suspendido,
+    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) AS diastranscurridos,
+    logistpanaderiaordenoperacionesintegrador.id_OrdenOperacionesAsignacion,
+    logistpanaderiaclienteasignacion.id AS id_asociado,
+    logistpanaderiacliente.id as idpanaderiagreg,
+    logistpanaderiaclienteasignacion.id_producto as idproductogreg
+FROM
+        logistpanaderiacliente
+        INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
+        INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
+        LEFT JOIN logistpanaderiaordenoperacionesintegrador ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaclienteasignacion.id
+        LEFT JOIN logistpanaderiaordenoperacionesasignacion ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaordenoperacionesasignacion.id
+WHERE
+        logistpanaderiacliente.id_distribuidora = " . $data->id_OrdenOperaciones . "
+GROUP BY
+logistpanaderiacliente.id";
+return DB::select($sql_string);
+
 }
 
 public function AddOrderOfOperation($data){
-
     $count_op = logistConfig::value('OrdenOperacion') + 1;
     if ((strlen(strval($count_op))) == 1) {$count_op_str = '0'. strval($count_op);}
     if ((strlen(strval($count_op))) == 2) {$count_op_str = '00'. strval($count_op);}
     if ((strlen(strval($count_op))) == 3) {$count_op_str = '000'. strval($count_op);}
-
     $date = Carbon::now();
     $date = $date->format('Y');
     $cod_op = 'OP-'. $date . '-'. $count_op_str;
@@ -105,20 +163,25 @@ public function DistributionOrderList(){
 public function AsigClientOrderofOperations($data){
 
     $sql_string = "SELECT
-    logistpanaderiacliente.id,
     logistpanaderiacliente.NombrePanaderia,
     logistpanaderiaproductos.nombre,
     logistpanaderiaclienteasignacion.cantidad,
     logistpanaderiacliente.frecuencia,
     logistpanaderiacliente.UltimoDespacho,
     logistpanaderiacliente.suspendido,
-    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) as diastranscurridos
-FROM
-    logistpanaderiacliente
-    INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
-    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
-WHERE
-logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
+    DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) AS diastranscurridos,
+    logistpanaderiaordenoperacionesintegrador.id_OrdenOperacionesAsignacion,
+    logistpanaderiaclienteasignacion.id AS id_asociado,
+    logistpanaderiacliente.id as idpanaderiagreg,
+    logistpanaderiaclienteasignacion.id_producto as idproductogreg
+    FROM
+        logistpanaderiacliente
+        INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
+        INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
+        LEFT JOIN logistpanaderiaordenoperacionesintegrador ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaclienteasignacion.id
+        LEFT JOIN logistpanaderiaordenoperacionesasignacion ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaordenoperacionesasignacion.id
+    WHERE
+        logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
 
     return DB::select($sql_string);
 }
@@ -127,12 +190,18 @@ public function DiscountExistenceOfTheWherehause($data){
     $data = (object) $data;
     $date = Carbon::now();
     $date = $date->format('d-m-Y');
-    $asignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
-      
-        'id_OrdenDeOperaciones' => $data->id_OrdenOperaciones,
+
+     $asignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
+              'id_OrdenDeOperaciones' => $data->id_OrdenOperaciones,
         'id_panadera' => $data->id_Panaderia,
         'fechaAsignacion' => $date, //carbobo
         'pesoTN' => ($data->cantidad * 50)/1000,
+    ]);
+
+
+    logistpanaderiaordenoperacionesintegrador::create([
+        'id_OrdenOperacionesAsignacion' => $asignacion->id,
+        'id_ClienteAsignacion' => $data->id_Asociado,
     ]);
 
     $ArrayExisencia = logistpanaderiadistribuidoraalmacen::where('existencia','>','0')
@@ -159,6 +228,9 @@ public function DiscountExistenceOfTheWherehause($data){
                 'costo' => $ArrayExisencia[$i]->preciocompra,
                 'precio' => $ArrayExisencia[$i]->precioventa,
                 'id_alamcenDistribucion' => $ArrayExisencia[$i]->id,
+                'id_panaderia'=>$data->id_Panaderia,
+                'id_OrdendeOperaciones'=>$data->id_OrdenOperaciones,
+
             ]);
 
 
@@ -180,6 +252,8 @@ public function DiscountExistenceOfTheWherehause($data){
                 'costo' => $ArrayExisencia[$i]->preciocompra,
                 'precio' => $ArrayExisencia[$i]->precioventa,
                 'id_alamcenDistribucion' => $ArrayExisencia[$i]->id,
+                'id_panaderia'=>$data->id_Panaderia,
+                'id_OrdendeOperaciones'=>$data->id_OrdenOperaciones,
             ]);
             $techo = 0;
         }              

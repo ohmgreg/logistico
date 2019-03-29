@@ -10,18 +10,6 @@
         $(this).datepicker('hide');
     });
 
-    $("#M-Insert-2").on("hidden.bs.modal", function(){
-        LoadVars.ArrayPanaderiaDef = [];
-        LoadVars.ArrayPanaderia.forEach(function(element){
-            if(element.val !== ""){
-                element.id_OrdenOperaciones = parseInt(element.id_OrdenOperaciones, 10);
-                element.cantidad = parseInt(element.val, 10);
-                LoadVars.ArrayPanaderiaDef.push(element);
-            }
-        });
-        console.log(LoadVars.ArrayPanaderiaDef);
-    });
-
     $("#txt_OrdenFechaInicio").change(function(){
         LoadVars.fechainicio = $(this).val();
     });
@@ -138,25 +126,26 @@
 
     $("#tableOrdenDistribucionDetalle").on("keyup", ".ctrUpdate1", function(){
         var fila = $(this).closest('tr').index();
-        var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
         LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
         LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
-        LoadVars.ArrayPanaderia[id_Pana] = {
-            id_Panaderia: parseInt($(this)[0].id.replace("sw_", ""), 10),
-            id_Asociado: LoadVars.ArrayAsociado[id_Pana],
+        LoadVars.InputPanaderiaAsignada = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(3).text(), 10);
+
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {
             id_Producto: LoadVars.id_producto, 
             id_Distribuidora: LoadVars.id_Distribuidora, 
-            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
+            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, 
+            id_Panaderia: LoadVars.id_TablePanaderia, 
             val: LoadVars.InputPanaderiaCantidad
         }; 
+
         if(LoadVars.InputPanaderiaCantidad !== ""){
             swCountCell = checkInt(LoadVars.InputPanaderiaCantidad, LoadVars.id_TablePanaderia, this);
-        };
+        }
         if(LoadVars.InputPanaderiaAsignada < LoadVars.InputPanaderiaCantidad){
             Notify("LA CANTIDAD SOLICITADA NO PUEDE SER MAYOR QUE LA ASIGNADA", "danger");
             $($(this)[0]).val(LoadVars.InputPanaderiaAsignada);
             LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaAsignada}; 
-        };
+        }
         var a = 0;
         LoadVars.ArrayPanaderia.forEach(function(element, index){
             if(element.val !== ""){
@@ -174,15 +163,13 @@
 
     $("#tableOrdenDistribucionDetalle").on("click", ".sw_", function(){
         var fila = $(this).closest('tr').index();
-        var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
         LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
         LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
-        LoadVars.ArrayPanaderia[id_Pana] = {
-            id_Panaderia: parseInt($(this)[0].id.replace("sw_", ""), 10),
-            id_Asociado: LoadVars.ArrayAsociado[id_Pana],
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {
             id_Producto: LoadVars.id_producto, 
             id_Distribuidora: LoadVars.id_Distribuidora, 
-            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
+            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, 
+            id_Panaderia: LoadVars.id_TablePanaderia, 
             val: LoadVars.InputPanaderiaCantidad
         }; 
         var a = 0;
