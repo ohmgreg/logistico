@@ -62,6 +62,7 @@ route::post('_listOrderOfOperation',   'OrdenDeOperacionesController@_listOrderO
 route::post('_DistributionOrderList',     'OrdenDeOperacionesController@_DistributionOrderList');
 route::post('_AsigClientOrderofOperations',     'OrdenDeOperacionesController@_AsigClientOrderofOperations');
 route::post('_existenciadistribuidora',     'OrdenDeOperacionesController@_existenciadistribuidora');
+route::post('_DiscountExistenceOfTheWherehause',     'OrdenDeOperacionesController@_DiscountExistenceOfTheWherehause');
 
 
 

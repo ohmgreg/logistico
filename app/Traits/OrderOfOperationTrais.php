@@ -124,15 +124,15 @@ logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
 }
 
 public function DiscountExistenceOfTheWherehause($data){
-
+    $data = (object) $data;
     $date = Carbon::now();
     $date = $date->format('d-m-Y');
     $asignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
       
-        'id_OrdenDeOperaciones' => $data->id_OrdenDeOperaciones,
-        'id_panadera' => $data->id_panadera,
+        'id_OrdenDeOperaciones' => $data->id_OrdenOperaciones,
+        'id_panadera' => $data->id_Panaderia,
         'fechaAsignacion' => $date, //carbobo
-        'PesoTN' => ($data->cantidad * 50)/1000,
+        'pesoTN' => ($data->cantidad * 50)/1000,
     ]);
 
     $ArrayExisencia = logistpanaderiadistribuidoraalmacen::where('existencia','>','0')
@@ -140,6 +140,7 @@ public function DiscountExistenceOfTheWherehause($data){
 
     $techo = $data->cantidad;
     $i = 0;
+
      while ($techo > 0) {
         $existencia = $ArrayExisencia[$i]->existencia;
         $id = $ArrayExisencia[$i]->id;
@@ -148,12 +149,12 @@ public function DiscountExistenceOfTheWherehause($data){
             logistpanaderiadistribuidoraalmacen::where('id','=',$id)->update([
                 'existencia' => 0,
             ]);
-
-            logistpanaderiaordenoperacionesasignaciondetalle::create([
-                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdenDistribucion,
-                'id_Distribuidora' => $ArrayExisencia[$i]->Distribuidora,
+          
+            logistpanaderiaordenoperacionesasignaciondetalle::create([                
+                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdendeDistribucion,
+                'id_Distribuidora' => $ArrayExisencia[$i]->id_Distribuidora,
                 'id_producto' => $data->id_Producto,
-                'cantidad' => $ArrayExisencia[$i]->existencia,
+                'cantidad' => ord($data->cantidad),
                 'id_OrdenOperacionesAsignacion' => $asignacion->id,
                 'costo' => $ArrayExisencia[$i]->preciocompra,
                 'precio' => $ArrayExisencia[$i]->precioventa,
@@ -165,14 +166,14 @@ public function DiscountExistenceOfTheWherehause($data){
             $i = $i + 1;
         } else {
             $resto = $existencia - $techo;
-            $techo = 0;
+            
             logistpanaderiadistribuidoraalmacen::where('id','=',$id)->update([
                 'existencia' => $resto,
             ]);
 
             logistpanaderiaordenoperacionesasignaciondetalle::create([
-                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdenDistribucion,
-                'id_Distribuidora' => $ArrayExisencia[$i]->Distribuidora,
+                'id_OrdenDistribucion' => $ArrayExisencia[$i]->id_OrdendeDistribucion,
+                'id_Distribuidora' => $ArrayExisencia[$i]->id_Distribuidora,
                 'id_producto' => $data->id_Producto,
                 'cantidad' => $techo,
                 'id_OrdenOperacionesAsignacion' => $asignacion->id,
@@ -180,6 +181,7 @@ public function DiscountExistenceOfTheWherehause($data){
                 'precio' => $ArrayExisencia[$i]->precioventa,
                 'id_alamcenDistribucion' => $ArrayExisencia[$i]->id,
             ]);
+            $techo = 0;
         }              
      }
      return 1;

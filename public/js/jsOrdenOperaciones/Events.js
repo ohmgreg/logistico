@@ -103,9 +103,7 @@
         LoadFunctions._DelWarehouseDistributor(LoadVars);        
     });
 
-    N("#btnPanaderiaUpdate").click(function(){
-        LoadFunctions.DiscountExistenceOfTheWherehause(LoadVars);
-    });
+
 
     $('#tableOrdenDistribucionDetalle tbody').on( 'click', '.sw_', function () {
         var fila = $(this).closest('tr').index();
@@ -130,34 +128,67 @@
         var fila = $(this).closest('tr').index();
         LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
         LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
-        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad}; 
+        LoadVars.InputPanaderiaAsignada = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(3).text(), 10);
+
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_Producto: LoadVars.id_producto, id_Distribuidora: LoadVars.id_Distribuidora, id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad}; 
+
         if(LoadVars.InputPanaderiaCantidad !== ""){
             swCountCell = checkInt(LoadVars.InputPanaderiaCantidad, LoadVars.id_TablePanaderia, this);
+        }
+        if(LoadVars.InputPanaderiaAsignada < LoadVars.InputPanaderiaCantidad){
+            Notify("LA CANTIDAD SOLICITADA NO PUEDE SER MAYOR QUE LA ASIGNADA", "danger");
+            $($(this)[0]).val(LoadVars.InputPanaderiaAsignada);
+            LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaAsignada}; 
         }
         var a = 0;
         LoadVars.ArrayPanaderia.forEach(function(element, index){
             if(element.val !== ""){
-                console.log(/^([0-9]{1,6})$/.test(element.val))
                 a += /^([0-9]{1,6})$/.test(element.val) ? parseInt(element.val, 10) : 0
             }
         });
-        LoadVars.Pedido = a;
-        console.log(a);
+        LoadVars.existenciaAux = LoadVars.existencia - a;
+        $("#panaderiaCantidad p")[0].innerText = "CANTIDAD EN EXISTENCIA: " + LoadVars.existenciaAux + " SACOS";
+        if(LoadVars.existenciaAux < 0){            
+            $($("#panaderiaCantidad p")[0]).css("color","red");
+        }else{
+            $($("#panaderiaCantidad p")[0]).css("color","green");
+        }
     });
 
     $("#tableOrdenDistribucionDetalle").on("click", ".sw_", function(){
         var fila = $(this).closest('tr').index();
-        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
         LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
-        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad};
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
+        LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_Producto: LoadVars.id_producto, id_Distribuidora: LoadVars.id_Distribuidora, id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaCantidad}; 
         var a = 0;
         LoadVars.ArrayPanaderia.forEach(function(element){
             if(element.val !== ""){
                 a += parseInt(element.val, 10);
             }
         }); 
-        LoadVars.Pedido = a;
-        console.log(a);
+        LoadVars.existenciaAux = LoadVars.existencia - a;
+        $("#panaderiaCantidad p")[0].innerText = "CANTIDAD EN EXISTENCIA: " + LoadVars.existenciaAux + " SACOS";
+        if(LoadVars.existenciaAux < 0){            
+            $($("#panaderiaCantidad p")[0]).css("color","red");
+        }else{
+            $($("#panaderiaCantidad p")[0]).css("color","green");
+        }
+    });
+
+    N("#btnPanaderiaUpdate").click(function(){
+        if(LoadVars.existenciaAux < 0){            
+            Notify("LA CANTIDAD SOLICITADA ES MAYOR QUE LA EXISTENCIA EN ALMACEN", "danger")
+        }else{
+            LoadVars.ArrayPanaderiaDef = [];
+            LoadVars.ArrayPanaderia.forEach(function(element){
+                if(element.val !== ""){
+                    element.id_OrdenOperaciones = parseInt(element.id_OrdenOperaciones, 10);
+                    element.cantidad = parseInt(element.val, 10);
+                    LoadVars.ArrayPanaderiaDef.push(element);
+                }
+            }); 
+        }
+        LoadFunctions._DiscountExistenceOfTheWherehause();
     });
 
 

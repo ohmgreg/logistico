@@ -46,5 +46,11 @@ class OrdenDeOperacionesController extends Controller
         return $this->existenciadistribuidora($data);
         
     }
+
+    public function _DiscountExistenceOfTheWherehause(Request $data){
+        for ($i=0; $i < count($data -> ArrayPanaderiaDef); $i++) { 
+            return $this->DiscountExistenceOfTheWherehause($data -> ArrayPanaderiaDef[$i]);
+        }        
+    }
     
 }

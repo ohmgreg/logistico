@@ -37,10 +37,10 @@
                 strTd += isNull(data[i]["cod_recarga"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cod_recarga"] + '</td>';
                 strTd += isNull(data[i]["merma"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["merma"] +'</td>';
                 strTd += isNull(data[i]["nombre"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["nombre"] + '</td>';
-                strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] / 1000 + '</td>';
+                strTd += isNull(data[i]["existenciaTN"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["existenciaTN"] / 1000 + '</td>';
                 strTd += isNull(data[i]["manufactura"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["manufactura"] + '</td>';
                 strTd += '<td style="text-align: left;">';
-                if(isNull(data[i]["manufactura"])){
+                if(isNull(data[i]["manufactura"])|| parseInt(data[i]["existenciaTN"], 10) > 50){
                     strTd += '<button type="button" data-toggle="tooltip" title="MANUFACTURAR" class="btn btn-primary btn-flat" id="btn_manufactura"><i class="fa fa-industry" id =' + data[i]["id"] + '></i></button>';
                 }
                 if(isNull(data[i]["merma"])){

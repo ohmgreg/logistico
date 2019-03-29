@@ -138,7 +138,7 @@
     WinFunc._existenciadistribuidora = function(data){
         Ajax("_existenciadistribuidora", LoadVars, function(data){
             LoadVars.id_producto = data[0].id_producto;
-            LoadVars.existencia = data[0].existencia;
+            LoadVars.existencia = LoadVars.existenciaAux = data[0].existencia;
             $("#panaderiaCantidad p")[0].innerText = "CANTIDAD EN EXISTENCIA: " + LoadVars.existencia + " SACOS";
         })
     }
@@ -158,8 +158,8 @@
                     strTd += '<td></td>';
                 }
                 strTd += isNull(data[i]["NombrePanaderia"]) ? '<td></td>' : '<td style="text-align: left;">' + data[i]["NombrePanaderia"] + '</td>';
-                strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] + '</td>';
-                strTd += isNull(data[i]["UltimoDespacho"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["UltimoDespacho"] + '</td>';
+                strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] + '</td>';     
+                strTd += isNull(data[i]["UltimoDespacho"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["UltimoDespacho"] + '</td>';                
                 strTd += isNull(data[i]["frecuencia"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["frecuencia"] + '</td>';
                 var status = data[i]["suspendido"] == 0 ? "ACTIVO" : "SUSPENDIDO";
                 strTd += '<td style="text-align: center;">' + status + '</td>';                
@@ -179,8 +179,21 @@
         })
     }
 
-    WinFunc.DiscountExistenceOfTheWherehause  = function(){
-        console.log(TableOrdenPanaderia.data());
+    WinFunc._DiscountExistenceOfTheWherehause = function(data){
+        Ajax("_DiscountExistenceOfTheWherehause", LoadVars, function(data){
+            LoadVars.ArrayPanaderia = [];
+            LoadVars.ArrayPanaderiaDef = [];
+            LoadVars.InputPanaderiaAsignada = "";
+            LoadVars.InputPanaderiaCantidad = "";
+            LoadVars.existencia = "";
+            LoadVars.existenciaAux = "";
+            LoadVars.id_Distribuidora = "";
+            LoadVars.id_TablePanaderia = "";
+            $("#panaderiaCantidad p")[0].innerText = "";
+            $("#tableOrdenDistribucionDetalle").dataTable().fnDestroy();
+            $("#tableOrdenDistribucionDetalle tbody").empty();
+            WinFunc._listDistribuidora("cmb-distribuidora");
+        }, true)
     }
 
 

@@ -87,7 +87,7 @@
 
     window.checkInt = function(a, b, c){
         var sw = true;
-        if(!/^[0-9]$/.test(a)){
+        if(!/^([0-9]{1,6})$/.test(a)){
             Notify("FORMATO DEL ITEM: " + b + " NO ESTA PERMITIDO", "danger");
             $($(c).closest('tr')[0]).css("background-color","red");
             $($(c).closest('tr')[0]).css("color","white");

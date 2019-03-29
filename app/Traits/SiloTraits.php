@@ -6,6 +6,7 @@ use App\LogistPanaderiaSilo;
 use App\LogistPanaderiaSiloAlmacen;
 use App\logistpanaderiasiloalmacenincorporacion;
 use App\logistConfig;
+use App\logistpanaderiasiloalmacenmanofactura;
 
 trait SiloTraits
 {
@@ -19,7 +20,7 @@ trait SiloTraits
     public function listSiloRecarga($data)
     {   
         // return logistpanaderiasiloalmacenincorporacion::where('id_Silo', $data->id_Silo)->get();
-        $sql_string = "SELECT
+        $sql_string = "SELECT DISTINCT
         logistpanaderiasiloalmacenincorporacion.id,
         logistpanaderiasiloalmacenincorporacion.cod_recarga,
         logistpanaderiasiloalmacenincorporacion.id_Silo,
@@ -32,10 +33,12 @@ trait SiloTraits
         logistpanaderiasiloalmacenincorporacion.nota,
         logistpanaderiasiloalmacenincorporacion.created_at,
         logistpanaderiasiloalmacenincorporacion.updated_at,
-        logistpanaderiaproductos.nombre
+        logistpanaderiaproductos.nombre,
+        logistpanaderiasiloalmacen.cantidad AS existenciaTN
         FROM
         logistpanaderiasiloalmacenincorporacion
         INNER JOIN logistpanaderiaproductos ON logistpanaderiasiloalmacenincorporacion.id_producto = logistpanaderiaproductos.id
+        INNER JOIN logistpanaderiasiloalmacen ON logistpanaderiasiloalmacen.id_Silo = logistpanaderiasiloalmacenincorporacion.id_Silo AND logistpanaderiasiloalmacen.id_producto = logistpanaderiasiloalmacenincorporacion.id_producto
         WHERE
         logistpanaderiasiloalmacenincorporacion.id_Silo = 1";
         return DB::select($sql_string);
@@ -107,14 +110,31 @@ trait SiloTraits
     }
 
     public function updateManufactura($data){
+
+        $ExistenciaActual = logistpanaderiasiloalmacenincorporacion::where('id',$data['id_incorporacion'])
+        ->value('existencia');
+        $ManufacturaActual = logistpanaderiasiloalmacenincorporacion::where('id',$data['id_incorporacion'])
+        ->value('manufactura');
+
         logistpanaderiasiloalmacenincorporacion::where('id',$data['id_incorporacion'])
         ->update([
-                'manufactura'=>$data['manufactura'],
-                'existencia'=>$data['manufactura']
+                'manufactura'=>$data['manufactura'] + $ManufacturaActual,
+                'existencia'=>$data['manufactura'] + $ExistenciaActual
         ]);
+
+        logistpanaderiasiloalmacenmanofactura::create([
+
+            'id_incorporacion'=> $data->id_incorporacion,
+            'id_silo' => $data->id_Silo,
+            'id_producto' => $data->id_producto,
+            'manofacturado' => $data->manufactura,
+
+        ]);
+
         $id_LogistPanaderiaSiloAlmacen = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('id');
         $ExistenciaProducto = LogistPanaderiaSiloAlmacen::where('id_producto', $data['id_producto'])->where('id_Silo', $data['id_Silo'])->value('cantidad');
         $ExistenciaProducto = $ExistenciaProducto - ($data['manufactura'] * 50);
+
         return LogistPanaderiaSiloAlmacen::where('id', $id_LogistPanaderiaSiloAlmacen)
         ->update([
             'cantidad' => $ExistenciaProducto,
