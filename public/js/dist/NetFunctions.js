@@ -31,6 +31,7 @@
     };
 
     win.Ajax = function(route, data, funct, c){
+        console.log(getToken())
         if(c){Notify("PROCESANDO INFORMACION ESPERE POR FAVOR...", "info");}        
         $.ajax({
             url: route,
