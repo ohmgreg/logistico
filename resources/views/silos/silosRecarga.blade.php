@@ -5,8 +5,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">RECARGA DE SILOS</div>
             <div class="modal-body">
-                <div><label>SELECCIONE UN SILO</label><select id='cmb-silo' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
-                <div><label>SELECCIONE UN PRODUCTO</label><select id='cmb-producto' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
+                <div><label>SELECCIONE UN SILO</label><select id='cmb-silo' name="id_Silo" class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
+                <div><label>SELECCIONE UN PRODUCTO</label><select id='cmb-producto' name="id_producto" class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>
                 <div class="form-group">
                     <label>CANTIDAD:</label>
                     <div class="input-group">

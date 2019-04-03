@@ -20,21 +20,23 @@ trait OrderOfOperationTrais
 
 
     //Temp Orden Operaciones;
-public function addoptemp($data){
-
-    return logistpanaderiaOrdenOperacionTemp::create([
-        'Cantidad' => $data('Cantidad'),
-        'id_Producto' => $data('id_Producto'),
-        'id_Panaderia' => $data('id_Panaderia'),
-        'id_OrdenOperaciones' => $data('id_OrdenOperaciones'),
-        'id_distribuidora' => $data('id_distribuidora'),
-        'id_asociado' => $data('id_asociado'), 
+public function addoptempCreate($data){
+    $data = (object) $data;
+    $algo = logistpanaderiaOrdenOperacionTemp::create([
+        'Cantidad' => $data->Cantidad,
+        'id_Producto' => $data->id_Producto,
+        'id_Panaderia' => $data->id_Panaderia,
+        'id_OrdenOperaciones' => $data->id_OrdenOperaciones,
+        'id_distribuidora' => $data->id_Distribuidora,
+        'id_asociado' => $data->id_Asociado 
     ]);
+    return 1;
 
 }
 
 public function deloptemp($data){
-    return logistpanaderiaOrdenOperacionTemp::where('id_OrdenOperaciones', $data->id_OrdenOperaciones)
+
+    return logistpanaderiaOrdenOperacionTemp::where('id_OrdenOperaciones','=',$data->id_OrdendeOperacion)
     ->delete();
 }
 
@@ -95,20 +97,19 @@ public function ShowOrderOfOperation($data){
     logistpanaderiacliente.UltimoDespacho,
     logistpanaderiacliente.suspendido,
     DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) AS diastranscurridos,
-    logistpanaderiaordenoperacionesintegrador.id_OrdenOperacionesAsignacion,
     logistpanaderiaclienteasignacion.id AS id_asociado,
-    logistpanaderiacliente.id as idpanaderiagreg,
-    logistpanaderiaclienteasignacion.id_producto as idproductogreg
-FROM
-        logistpanaderiacliente
-        INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
-        INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
-        LEFT JOIN logistpanaderiaordenoperacionesintegrador ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaclienteasignacion.id
-        LEFT JOIN logistpanaderiaordenoperacionesasignacion ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaordenoperacionesasignacion.id
-WHERE
-        logistpanaderiacliente.id_distribuidora = " . $data->id_OrdenOperaciones . "
-GROUP BY
-logistpanaderiacliente.id";
+    logistpanaderiacliente.id AS idpanaderiagreg,
+    logistpanaderiaclienteasignacion.id_producto AS idproductogreg,
+    logistpanaderiaordenoperaciontemp.id AS id_tmp
+    FROM
+    logistpanaderiacliente
+    INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
+    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
+    LEFT JOIN logistpanaderiaordenoperaciontemp ON logistpanaderiaordenoperaciontemp.id_asociado = logistpanaderiaclienteasignacion.id
+    WHERE
+            logistpanaderiacliente.id_distribuidora = " . $data->id_OrdenOperaciones . "
+    GROUP BY
+    logistpanaderiacliente.id";
 return DB::select($sql_string);
 
 }
@@ -162,7 +163,7 @@ public function DistributionOrderList(){
 
 public function AsigClientOrderofOperations($data){
 
-    $sql_string = "SELECT
+    $sql_string = "SELECT DISTINCT
     logistpanaderiacliente.NombrePanaderia,
     logistpanaderiaproductos.nombre,
     logistpanaderiaclienteasignacion.cantidad,
@@ -170,19 +171,17 @@ public function AsigClientOrderofOperations($data){
     logistpanaderiacliente.UltimoDespacho,
     logistpanaderiacliente.suspendido,
     DATEDIFF(CURDATE(), STR_TO_DATE(logistpanaderiacliente.UltimoDespacho,'%d/%m/%Y')) AS diastranscurridos,
-    logistpanaderiaordenoperacionesintegrador.id_OrdenOperacionesAsignacion,
     logistpanaderiaclienteasignacion.id AS id_asociado,
-    logistpanaderiacliente.id as idpanaderiagreg,
-    logistpanaderiaclienteasignacion.id_producto as idproductogreg
+    logistpanaderiacliente.id AS idpanaderiagreg,
+    logistpanaderiaclienteasignacion.id_producto AS idproductogreg,
+    logistpanaderiaordenoperaciontemp.id AS id_tmp
     FROM
-        logistpanaderiacliente
-        INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
-        INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
-        LEFT JOIN logistpanaderiaordenoperacionesintegrador ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaclienteasignacion.id
-        LEFT JOIN logistpanaderiaordenoperacionesasignacion ON logistpanaderiaordenoperacionesintegrador.id_ClienteAsignacion = logistpanaderiaordenoperacionesasignacion.id
+    logistpanaderiacliente
+    INNER JOIN logistpanaderiaclienteasignacion ON logistpanaderiacliente.id = logistpanaderiaclienteasignacion.id_Panaderia
+    INNER JOIN logistpanaderiaproductos ON logistpanaderiaclienteasignacion.id_producto = logistpanaderiaproductos.id
+    LEFT JOIN logistpanaderiaordenoperaciontemp ON logistpanaderiaordenoperaciontemp.id_asociado = logistpanaderiaclienteasignacion.id
     WHERE
-        logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
-
+            logistpanaderiacliente.id_distribuidora = " . $data->id_Distribuidora;
     return DB::select($sql_string);
 }
 

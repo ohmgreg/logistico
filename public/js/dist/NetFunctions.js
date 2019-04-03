@@ -111,7 +111,24 @@
         N(id_Form + " select").html('')
     }
 
+    window.LoadVars = {};
 
+    $("select").change(function(){
+        window.LoadVars[this["name"]] = this.value;
+    });
+
+    $("input").change(function(){
+        window.LoadVars[this["name"]] = this.value;
+    });
+
+
+
+
+
+
+    $('.datepicker').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
 
 
 

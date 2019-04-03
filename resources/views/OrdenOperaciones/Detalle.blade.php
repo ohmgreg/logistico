@@ -7,7 +7,7 @@
             <div class="panel-heading" id="HeadingId">DISTRIBUIDORAS</div>
             <div class="modal-body">
                 <form action="" id="FormOrdenDetalle">                    
-                    <div><label>SELECCIONE UNA DISTRIBUIDORA</label><select id='cmb-distribuidora' class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>                    
+                    <div><label>SELECCIONE UNA DISTRIBUIDORA</label><select id='cmb-distribuidora' name="id_Distribuidora" class="form-control"><option value="" disabled selected>SELECCIONE UN OPCIÓN</option></select></div>                    
                 </form>
             </div>
         </div>
@@ -26,8 +26,7 @@
                             <th>ACTIVAR</th>
                             <th>PANADERIA</th>
                             <th>ASIGNACION (Sacos)</th>
-                            <th>ULTIMO DESPACHO</th>
-                            <th>FRECUENCIA (Dias)</th>
+                            <th>ULTIMO DESPACHO</th>                            
                             <th>ESTATUS</th>  
                             <th>CANTIDAD</th>             
                         </tr>
@@ -39,8 +38,7 @@
                             <th>ACTIVAR</th>
                             <th>PANADERIA</th>
                             <th>ASIGNACION (Sacos)</th>
-                            <th>ULTIMO DESPACHO</th>
-                            <th>FRECUENCIA (Dias)</th>
+                            <th>ULTIMO DESPACHO</th>                            
                             <th>ESTATUS</th>  
                             <th>CANTIDAD</th>             
                         </tr>

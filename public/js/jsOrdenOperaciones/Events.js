@@ -1,87 +1,39 @@
 ;(function(win){
     var swCountCell;
 
+    $("#cmb-silo").change(function(){
+       LoadFunctions._ExistenceOfSilo();
+    });
+
+    $("#cmb-distribuidora").change(function(){
+        LoadFunctions._existenciadistribuidora();   
+        LoadFunctions._AsigClientOrderofOperations();
+    });
+
+    N("#btnPanaderiaUpdate").click(function(){
+        if(LoadVars.existenciaAux < 0){            
+            Notify("LA CANTIDAD SOLICITADA ES MAYOR QUE LA EXISTENCIA EN ALMACEN", "danger")
+        }else{
+            LoadVars.ArrayPanaderiaDef = [];
+            LoadVars.ArrayPanaderia.forEach(function(element){
+                if(element.val !== ""){
+                    element.id_OrdenOperaciones = parseInt(element.id_OrdenOperaciones, 10);
+                    element.cantidad = parseInt(element.val, 10);
+                    LoadVars.ArrayPanaderiaDef.push(element);
+                }
+            }); 
+        }
+        LoadFunctions._DiscountExistenceOfTheWherehause();
+    });
+
+    N("#btnPanaderiaUpdate").click(function(){
+        LoadFunctions._existenciadistribuidora(LoadVars);        
+    });
+
     $('#aTree').click(function(){
         var ulMenu = $(this).parent().children('ul').get(0)
         $(ulMenu).slideToggle("slow");
     })
-
-    $('.datepicker').on('changeDate', function(ev){
-        $(this).datepicker('hide');
-    });
-
-    $("#M-Insert-2").on("hidden.bs.modal", function(){
-        LoadVars.ArrayPanaderiaDef = [];
-        LoadVars.ArrayPanaderia.forEach(function(element){
-            if(element.val !== ""){
-                element.id_OrdenOperaciones = parseInt(element.id_OrdenOperaciones, 10);
-                element.cantidad = parseInt(element.val, 10);
-                LoadVars.ArrayPanaderiaDef.push(element);
-            }
-        });
-        console.log(LoadVars.ArrayPanaderiaDef);
-    });
-
-    $("#txt_OrdenFechaInicio").change(function(){
-        LoadVars.fechainicio = $(this).val();
-    });
-
-    $("#txt_OrdenFechaFin").change(function(){
-        LoadVars.fechafin = $(this).val();
-    });
-
-    $("#cmb-silo").change(function(){
-        LoadVars.id_Silo = $(this).val();
-        LoadFunctions._ExistenceOfSilo();
-    });
-
-    $("#cmb-distribuidora").change(function(){
-        LoadVars.id_Distribuidora = $(this).val();
-        LoadFunctions._existenciadistribuidora(LoadVars);   
-        LoadFunctions._AsigClientOrderofOperations(LoadVars);
-    });
-
-    $("#cmb-OrdenOperacion").change(function(){        
-        LoadVars.id_OrdenDistribucion = $(this).val();
-        
-    });
-
-    $("#cmb-producto").change(function(){
-        LoadVars.id_producto = $(this).val();
-    });
-
-    $("#cmb-responsable").change(function(){
-        LoadVars.id_responsable = $(this).val();
-    });
-
-    $("#txt_DetalleCantidad").change(function(){
-        LoadVars.cantidad = $(this).val();
-    });
-
-    $("#txt_DetallePrecioCompra").change(function(){
-        LoadVars.preciocompra = $(this).val();
-    });
-
-    $("#txt_DetallePrecioVenta").change(function(){
-        LoadVars.precioventa = $(this).val();
-    });
-
-    $("#tableOrdenDistribucion").on("click", "#btn_swOrdenActiva", function(){
-        LoadVars.id_OrdenDistrib = $(this)[0].firstChild.id;
-        LoadFunctions._ShowConfirm();
-    });
-
-    $("#tableOrdenDistribucionDetalle").on("click", "#btn_DetalleDelete", function(){
-        LoadVars.id_OrdenDistribucionDelete = $(this)[0].firstChild.id;
-        $('#M-Insert-2').css("overflow-y","auto");
-        $('#M-Insert-1').modal('show');
-    });
-
-    $("#tableOrdenDistribucion").on("click", "#btn_DetalleAdd", function(){
-        LoadVars.id_OrdendeOperacion = $(this)[0].firstChild.id;
-        LoadFunctions._listDistribuidora("cmb-distribuidora");
-        LoadFunctions._ShowDettalle();
-    });
 
     N("#btnOrdenDistribucionAdd").click(function(){
         if(checkInput(N("#txt_OrdenFechaInicio").val(), "DEBE INGRESAR UNA FECHA DE INICIO.", "danger")){return};
@@ -115,11 +67,26 @@
         LoadFunctions._DelWarehouseDistributor(LoadVars);        
     });
 
+    $("#tableOrdenDistribucion").on("click", "#btn_swOrdenActiva", function(){
+        LoadVars.id_OrdenDistrib = $(this)[0].firstChild.id;
+        LoadFunctions._ShowConfirm();
+    });
 
+    $("#tableOrdenDistribucionDetalle").on("click", "#btn_DetalleDelete", function(){
+        LoadVars.id_OrdenDistribucionDelete = $(this)[0].firstChild.id;
+        $('#M-Insert-2').css("overflow-y","auto");
+        $('#M-Insert-1').modal('show');
+    });
+
+    $("#tableOrdenDistribucion").on("click", "#btn_DetalleAdd", function(){
+        LoadVars.id_OrdendeOperacion = $(this)[0].firstChild.id;
+        LoadFunctions._listDistribuidora("cmb-distribuidora");
+        LoadFunctions._ShowDettalle();
+    });
 
     $('#tableOrdenDistribucionDetalle tbody').on( 'click', '.sw_', function () {
         var fila = $(this).closest('tr').index();
-        var InputSelect = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].childNodes[0];
+        var InputSelect = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].childNodes[0];
         var txtAsignacion = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(3).text();
         if ($(this).prop('checked')) {
             $(InputSelect).prop('disabled', false);
@@ -132,11 +99,8 @@
         }
     } );
 
-    N("#btnPanaderiaUpdate").click(function(){
-        LoadFunctions._existenciadistribuidora(LoadVars);        
-    });
-
     $("#tableOrdenDistribucionDetalle").on("keyup", ".ctrUpdate1", function(){
+        console.log("up")
         var fila = $(this).closest('tr').index();
         var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
         LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
@@ -175,8 +139,8 @@
     $("#tableOrdenDistribucionDetalle").on("click", ".sw_", function(){
         var fila = $(this).closest('tr').index();
         var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
-        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
-        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
+        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.id.replace("txt_", ""), 10) + 1;
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.value;
         LoadVars.ArrayPanaderia[id_Pana] = {
             id_Panaderia: parseInt($(this)[0].id.replace("sw_", ""), 10),
             id_Asociado: LoadVars.ArrayAsociado[id_Pana],
@@ -200,21 +164,23 @@
         }
     });
 
-    N("#btnPanaderiaUpdate").click(function(){
-        if(LoadVars.existenciaAux < 0){            
-            Notify("LA CANTIDAD SOLICITADA ES MAYOR QUE LA EXISTENCIA EN ALMACEN", "danger")
-        }else{
+    $("#M-Insert-2").on("hidden.bs.modal", function(){
+        if(LoadVars.id_Distribuidora !== undefined){
             LoadVars.ArrayPanaderiaDef = [];
             LoadVars.ArrayPanaderia.forEach(function(element){
                 if(element.val !== ""){
                     element.id_OrdenOperaciones = parseInt(element.id_OrdenOperaciones, 10);
-                    element.cantidad = parseInt(element.val, 10);
+                    element.Cantidad = parseInt(element.val, 10);
                     LoadVars.ArrayPanaderiaDef.push(element);
-                }
-            }); 
+                }            
+            });
+            LoadFunctions._addoptemp(LoadVars);
+            $("#panaderiaCantidad p")[0].innerText = "";
+            $("#tableOrdenDistribucionDetalle").dataTable().fnDestroy();
+            $("#tableOrdenDistribucionDetalle tbody").empty();
+            LoadFunctions._listDistribuidora("cmb-distribuidora");
+            console.log(LoadVars.ArrayPanaderiaDef);
         }
-        LoadFunctions._DiscountExistenceOfTheWherehause();
     });
-
 
 })(window);

@@ -1,10 +1,8 @@
 ;(function(win){
     var WinFunc = window.LoadFunctions = Logist.OrdenDistribucion = {};
-    win.LoadVars = Logist.OrdenDistribucion.vars = {};
     var TableOrdenPanaderia;
     LoadVars.ArrayPanaderia = [];
     LoadVars.ArrayAsociado = [];
-
 
     WinFunc._listSilo = function(idSelect){
         var str_opcion = '<option value="" disabled selected>SELECCIONE UNA OPCIÓN</option>';
@@ -113,6 +111,14 @@
         }, true)
     }
 
+    WinFunc._addoptemp = function(data){
+        Ajax("_deloptemp", LoadVars, function(data){
+            Ajax("_addoptemp", LoadVars, function(data){
+
+            }, true)
+        })
+    }
+
     WinFunc._AddWarehouseDistributor = function(data){
         Ajax("_AddWarehouseDistributor", LoadVars, function(data){
             FormControlInit("#FormOrdenDetalle");
@@ -136,8 +142,8 @@
         })
     }
 
-    WinFunc._existenciadistribuidora = function(data){
-        Ajax("_existenciadistribuidora", LoadVars, function(data){
+    WinFunc._existenciadistribuidora = function(){
+        Ajax("_existenciadistribuidora", LoadVars, function(data){            
             LoadVars.id_producto = data[0].id_producto;
             LoadVars.existencia = LoadVars.existenciaAux = data[0].existencia;
             $("#panaderiaCantidad p")[0].innerText = "CANTIDAD EN EXISTENCIA: " + LoadVars.existencia + " SACOS";
@@ -146,6 +152,7 @@
 
     WinFunc._AsigClientOrderofOperations = function(data){
         Ajax("_AsigClientOrderofOperations", LoadVars, function(data){
+            console.log(data);
             var strTd = "";
             for(var i = 0; i < data.length; i++){
                 LoadVars.id_ClienteAsignacion = data[i]["id_ClienteAsignacion"];
@@ -154,7 +161,7 @@
                 strTd += '<tr>';
                 strTd += '<td>' + (i + 1) + '</td>';
                 strTd += '<td>';
-                if(data[i]["id_OrdenOperacionesAsignacion"] == null){                    
+                if(data[i]["id_tmp"] == null){                    
                     strTd += '<div class="[ form-group ]"><input type="checkbox" name="sw_' + data[i]["idpanaderiagreg"] + '" id="sw_' + data[i]["idpanaderiagreg"] + '" autocomplete="off" class="sw_"/>';
                     strTd += '<div class="[ btn-group ]"><label for="sw_' + data[i]["idpanaderiagreg"] + '" class="[ btn btn-primary ]"><span class="[ glyphicon glyphicon-ok ]"></span><span></span></label></div></div>';
                 }else{
@@ -174,11 +181,10 @@
                 strTd += isNull(data[i]["NombrePanaderia"]) ? '<td></td>' : '<td style="text-align: left;">' + data[i]["NombrePanaderia"] + '</td>';
                 strTd += isNull(data[i]["cantidad"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["cantidad"] + '</td>';     
                 strTd += isNull(data[i]["UltimoDespacho"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["UltimoDespacho"] + '</td>';                
-                strTd += isNull(data[i]["frecuencia"]) ? '<td></td>' : '<td style="text-align: center;">' + data[i]["frecuencia"] + '</td>';
                 var status = data[i]["suspendido"] == 0 ? "ACTIVO" : "SUSPENDIDO";
                 strTd += '<td style="text-align: center;">' + status + '</td>';                
                 strTd += '<td style="text-align: center;">';
-                if(data[i]["id_OrdenOperacionesAsignacion"] !== null){                    
+                if(data[i]["id_tmp"] !== null){                    
                     strTd += '<input class="form-control input-sm ctrUpdate1" type="text" value ="' + data[i]["cantidad"] + '"placeholder="" id="txt_' + i + '" >';                    
                 }else{
                     strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + i + '" disabled>';

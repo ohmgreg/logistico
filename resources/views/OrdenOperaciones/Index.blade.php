@@ -9,22 +9,22 @@
                     <label>FECHA DE INICIO:</label>
                     <div class="input-group">                                
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input class="form-control input-sm datepicker ctrUpdate" type="text" placeholder="" id=txt_OrdenFechaInicio readonly>
+                        <input class="form-control input-sm datepicker ctrUpdate" name="fechainicio" type="text" placeholder="" id=txt_OrdenFechaInicio readonly>
                     </div>
                 </div>
                 <div class="form-group">                        
                     <label>FECHA FINAL:</label>
                     <div class="input-group">                                
                         <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input class="form-control input-sm datepicker ctrUpdate" type="text" placeholder="" id=txt_OrdenFechaFin readonly>
+                        <input class="form-control input-sm datepicker ctrUpdate" name="fechafin" type="text" placeholder="" id=txt_OrdenFechaFin readonly>
                     </div>
                 
                 </div>
                 <div class="form-group">
-                    <div><label>ORDEN DE DISTRIBUCION</label><select id='cmb-OrdenOperacion' class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
+                    <div><label>ORDEN DE DISTRIBUCION</label><select id='cmb-OrdenOperacion' name="id_Distribuidora" class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
                 </div>
                 <div class="form-group">
-                    <div><label>RESPONSABLE DE LA ORDEN DE OPERACION</label><select id='cmb-responsable' class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
+                    <div><label>RESPONSABLE DE LA ORDEN DE OPERACION</label><select id='cmb-responsable' name="id_responsable" class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
                 </div>
             </div>
             <div class="modal-footer">
