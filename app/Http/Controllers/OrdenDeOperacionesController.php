@@ -58,8 +58,8 @@ class OrdenDeOperacionesController extends Controller
         return 1;        
     }
 
-    public function _addoptemp(Request $data, $index = 0){         
-        if($index < count($data -> ArrayPanaderiaDef)){       
+    public function _addoptemp(Request $data, $index = 0){
+        if($index < count($data -> ArrayPanaderiaDef)){
             $jj = $this->addoptempCreate($data->ArrayPanaderiaDef[$index]);
             if($jj == 1){
                 $index++;

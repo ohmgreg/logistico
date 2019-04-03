@@ -10,6 +10,9 @@
     <li class="treeview"><a href="RecepcionMercancia"><i class="fa fa-angle-right"></i><span class="fontMenu">RECEPCION DE MERCANCIA</span></a></li>
     <li class="treeview"><a href="AjusteInventario"><i class="fa fa-angle-right"></i><span class="fontMenu">AJUSTE DE INVENTARIO</span></a></li> 
     <li class="treeview"><a href="OrdenOperaciones"><i class="fa fa-angle-right"></i><span class="fontMenu">ORDEN DE OPERACIONES</span></a></li>
+    <li class="treeview"><a href="CentroNotificaciones"><i class="fa fa-angle-right"></i><span class="fontMenu">CENTRO DE NOTIFICACIONES</span></a></li>
+    <li class="treeview"><a href="AsignacionDespacho"><i class="fa fa-angle-right"></i><span class="fontMenu">ASIGNACION DE DESPACHO</span></a></li>
+    <li class="treeview"><a href="Despacho"><i class="fa fa-angle-right"></i><span class="fontMenu">DESPACHO</span></a></li>
     {{-- <li class="treeview"><a href="#"><i class="fa fa-angle-right"></i><span class="fontMenu">DETALLE DE ORDEN DE OPER.</span></a></li>
     <li class="treeview">
         <a href="#" id="aTree"><i class="fa fa-angle-right"></i><span class="fontMenu">TRANSPORTE</span></a>

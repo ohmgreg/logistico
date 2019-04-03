@@ -31,7 +31,6 @@ public function addoptempCreate($data){
         'id_asociado' => $data->id_Asociado 
     ]);
     return 1;
-
 }
 
 public function deloptemp($data){
@@ -191,7 +190,7 @@ public function DiscountExistenceOfTheWherehause($data){
     $date = $date->format('d-m-Y');
 
      $asignacion = LogistPanaderiaOrdenOperacionesAsignacion::create([
-              'id_OrdenDeOperaciones' => $data->id_OrdenOperaciones,
+        'id_OrdenDeOperaciones' => $data->id_OrdenOperaciones,
         'id_panadera' => $data->id_Panaderia,
         'fechaAsignacion' => $date, //carbobo
         'pesoTN' => ($data->cantidad * 50)/1000,
@@ -261,7 +260,6 @@ public function DiscountExistenceOfTheWherehause($data){
    }
 
    public function existenciadistribuidora($data){
-
     $sql_string = "SELECT
     logistpanaderiadistribuidoraalmacen.id_Distribuidora,
     logistpanaderiadistribuidoraalmacen.id_producto,
@@ -273,8 +271,7 @@ public function DiscountExistenceOfTheWherehause($data){
     GROUP BY
     logistpanaderiadistribuidoraalmacen.id_Distribuidora,
     logistpanaderiadistribuidoraalmacen.id_producto";
-    return DB::select($sql_string);
-    
+    return DB::select($sql_string);    
    }
 
 

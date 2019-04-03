@@ -50,6 +50,21 @@
 		"jsOrdenOperaciones/Events.js",		
 		"jsOrdenOperaciones/Init.js"
 	],
+	"jsCentroNotificaciones":[
+		"jsCentroNotificaciones/Functions.js",
+		"jsCentroNotificaciones/Events.js",		
+		"jsCentroNotificaciones/Init.js"
+	],
+	"jsAsignacionDespacho":[
+		"jsAsignacionDespacho/Functions.js",
+		"jsAsignacionDespacho/Events.js",		
+		"jsAsignacionDespacho/Init.js"
+	],
+	"jsDespacho":[
+		"jsDespacho/Functions.js",
+		"jsDespacho/Events.js",		
+		"jsDespacho/Init.js"
+	],
 	"jsReversoAsignacion":[
 		"jsReversoAsignacion/Functions.js",
 		"jsReversoAsignacion/Events.js",		

@@ -111,10 +111,13 @@
         }, true)
     }
 
-    WinFunc._addoptemp = function(data){
+    WinFunc._addoptemp = function(){
         Ajax("_deloptemp", LoadVars, function(data){
             Ajax("_addoptemp", LoadVars, function(data){
-
+                $("#panaderiaCantidad p")[0].innerText = "";
+                $("#tableOrdenDistribucionDetalle").dataTable().fnDestroy();
+                $("#tableOrdenDistribucionDetalle tbody").empty();
+                LoadFunctions._listDistribuidora("cmb-distribuidora");
             }, true)
         })
     }
@@ -185,9 +188,9 @@
                 strTd += '<td style="text-align: center;">' + status + '</td>';                
                 strTd += '<td style="text-align: center;">';
                 if(data[i]["id_tmp"] !== null){                    
-                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" value ="' + data[i]["cantidad"] + '"placeholder="" id="txt_' + i + '" >';                    
+                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" value ="' + data[i]["cantidad"] + '"placeholder="" id="txt_' + data[i]["idpanaderiagreg"] + '" >';                    
                 }else{
-                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + i + '" disabled>';
+                    strTd += '<input class="form-control input-sm ctrUpdate1" type="text" placeholder="" id="txt_' + data[i]["idpanaderiagreg"] + '" disabled>';
                 }
                 strTd += '</td>';
                 strTd += '</tr>';            
@@ -219,6 +222,20 @@
             $("#tableOrdenDistribucionDetalle tbody").empty();
             WinFunc._listDistribuidora("cmb-distribuidora");
         }, true)
+    }
+
+    WinFunc.ArrayPanaderiaCreate = function(id_Pana, fila){
+        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.id.replace("txt_", ""), 10) + 1;
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.value;
+        LoadVars.InputPanaderiaAsignada = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(3).text();
+        LoadVars.ArrayPanaderia[id_Pana] = {
+            id_Panaderia: id_Pana,
+            id_Asociado: LoadVars.ArrayAsociado[id_Pana],
+            id_Producto: LoadVars.id_producto, 
+            id_Distribuidora: LoadVars.id_Distribuidora, 
+            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
+            val: LoadVars.InputPanaderiaCantidad
+        };        
     }
 
 

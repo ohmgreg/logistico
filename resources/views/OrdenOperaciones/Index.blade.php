@@ -21,10 +21,10 @@
                 
                 </div>
                 <div class="form-group">
-                    <div><label>ORDEN DE DISTRIBUCION</label><select id='cmb-OrdenOperacion' name="id_Distribuidora" class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
+                    <div><label>ORDEN DE DISTRIBUCION</label><select id='cmb-OrdenOperacion' name="id_Distribuidora" class="form-control"></select></div>
                 </div>
                 <div class="form-group">
-                    <div><label>RESPONSABLE DE LA ORDEN DE OPERACION</label><select id='cmb-responsable' name="id_responsable" class="form-control"><option value="" disabled selected>SELECCIONE UNA OPCIÓN</option></select></div>
+                    <div><label>RESPONSABLE DE LA ORDEN DE OPERACION</label><select id='cmb-responsable' name="id_responsable" class="form-control"></select></div>
                 </div>
             </div>
             <div class="modal-footer">

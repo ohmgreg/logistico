@@ -40,6 +40,18 @@ Route::get('/OrdenOperaciones', function(){
     return view('OrdenOperaciones.Index');
 });
 
+Route::get('/CentroNotificaciones', function(){    
+    return view('CentroNotificaciones.Index');
+});
+
+Route::get('/AsignacionDespacho', function(){    
+    return view('AsignacionDespacho.Index');
+});
+
+Route::get('/Despacho', function(){    
+    return view('Despacho.Index');
+});
+
 Route::get('/ReversoAsignacion', function(){    
     return view('ReversoAsignacion.Index');
 });

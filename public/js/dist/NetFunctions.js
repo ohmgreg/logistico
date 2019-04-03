@@ -94,6 +94,7 @@
             sw = false;
         }else{
             $($(c).closest('tr')[0]).css("background-color","white");
+            $($(c).closest('tr')[0]).css("color","black");
         }        
         return sw;
     };
@@ -117,14 +118,13 @@
         window.LoadVars[this["name"]] = this.value;
     });
 
+    $("select").empty();
+
+    $("select").html('<option value="" disabled selected>SELECCIONE UNA OPCIÓN</option>');
+
     $("input").change(function(){
         window.LoadVars[this["name"]] = this.value;
     });
-
-
-
-
-
 
     $('.datepicker').on('changeDate', function(ev){
         $(this).datepicker('hide');

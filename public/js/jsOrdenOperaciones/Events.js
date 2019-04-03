@@ -100,27 +100,17 @@
     } );
 
     $("#tableOrdenDistribucionDetalle").on("keyup", ".ctrUpdate1", function(){
-        console.log("up")
         var fila = $(this).closest('tr').index();
-        var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
-        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.id.replace("txt_", ""), 10) + 1;
-        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(7)[0].firstChild.value;
-        LoadVars.ArrayPanaderia[id_Pana] = {
-            id_Panaderia: parseInt($(this)[0].id.replace("sw_", ""), 10),
-            id_Asociado: LoadVars.ArrayAsociado[id_Pana],
-            id_Producto: LoadVars.id_producto, 
-            id_Distribuidora: LoadVars.id_Distribuidora, 
-            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
-            val: LoadVars.InputPanaderiaCantidad
-        }; 
+        var id_Pana = parseInt(this.id.replace("txt_", ""), 10);
+        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.value;
         if(LoadVars.InputPanaderiaCantidad !== ""){
             swCountCell = checkInt(LoadVars.InputPanaderiaCantidad, LoadVars.id_TablePanaderia, this);
         };
-        if(LoadVars.InputPanaderiaAsignada < LoadVars.InputPanaderiaCantidad){
+        if(parseInt(LoadVars.InputPanaderiaAsignada, 10) < parseInt(LoadVars.InputPanaderiaCantidad, 10)){
             Notify("LA CANTIDAD SOLICITADA NO PUEDE SER MAYOR QUE LA ASIGNADA", "danger");
             $($(this)[0]).val(LoadVars.InputPanaderiaAsignada);
-            LoadVars.ArrayPanaderia[LoadVars.id_TablePanaderia] = {id_OrdenOperaciones: LoadVars.id_OrdendeOperacion, id_Panaderia: LoadVars.id_TablePanaderia, val: LoadVars.InputPanaderiaAsignada}; 
         };
+        LoadFunctions.ArrayPanaderiaCreate(id_Pana, fila);
         var a = 0;
         LoadVars.ArrayPanaderia.forEach(function(element, index){
             if(element.val !== ""){
@@ -138,17 +128,8 @@
 
     $("#tableOrdenDistribucionDetalle").on("click", ".sw_", function(){
         var fila = $(this).closest('tr').index();
-        var id_Pana = parseInt($(this)[0].id.replace("sw_", ""), 10);
-        LoadVars.id_TablePanaderia = parseInt($('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.id.replace("txt_", ""), 10) + 1;
-        LoadVars.InputPanaderiaCantidad = $('#tableOrdenDistribucionDetalle tbody').find('tr').eq(fila).find('td').eq(6)[0].firstChild.value;
-        LoadVars.ArrayPanaderia[id_Pana] = {
-            id_Panaderia: parseInt($(this)[0].id.replace("sw_", ""), 10),
-            id_Asociado: LoadVars.ArrayAsociado[id_Pana],
-            id_Producto: LoadVars.id_producto, 
-            id_Distribuidora: LoadVars.id_Distribuidora, 
-            id_OrdenOperaciones: LoadVars.id_OrdendeOperacion,
-            val: LoadVars.InputPanaderiaCantidad
-        }; 
+        var id_Pana = parseInt(this.id.replace("sw_", ""), 10);
+        LoadFunctions.ArrayPanaderiaCreate(id_Pana, fila);
         var a = 0;
         LoadVars.ArrayPanaderia.forEach(function(element){
             if(element.val !== ""){
@@ -166,6 +147,7 @@
 
     $("#M-Insert-2").on("hidden.bs.modal", function(){
         if(LoadVars.id_Distribuidora !== undefined){
+            LoadVars.ArrayAsociado = [];
             LoadVars.ArrayPanaderiaDef = [];
             LoadVars.ArrayPanaderia.forEach(function(element){
                 if(element.val !== ""){
@@ -174,12 +156,8 @@
                     LoadVars.ArrayPanaderiaDef.push(element);
                 }            
             });
-            LoadFunctions._addoptemp(LoadVars);
-            $("#panaderiaCantidad p")[0].innerText = "";
-            $("#tableOrdenDistribucionDetalle").dataTable().fnDestroy();
-            $("#tableOrdenDistribucionDetalle tbody").empty();
-            LoadFunctions._listDistribuidora("cmb-distribuidora");
-            console.log(LoadVars.ArrayPanaderiaDef);
+            LoadVars.ArrayPanaderia = [];
+            LoadFunctions._addoptemp();
         }
     });
 
