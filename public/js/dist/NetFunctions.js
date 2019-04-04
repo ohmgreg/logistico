@@ -127,9 +127,9 @@
         window.LoadVars[this["name"]] = this.value;
     });
 
-    $('.datepicker').on('changeDate', function(ev){
-        $(this).datepicker('hide');
-    });
+    // $('.datepicker').on('changeDate', function(ev){
+    //     $(this).datepicker('hide');
+    // });
 
 
 

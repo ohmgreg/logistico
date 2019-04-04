@@ -3,7 +3,11 @@ N(".preload").nodeRemove(function(){
 		$('[data-toggle="tooltip"]').tooltip();
 		var d = new Date();
 		d.setDate(d.getDate() - 1);
-		$('.datepicker').datepicker({language: 'es', startDate: d});
+		$('.datepicker').datetimepicker({
+			language: 'es', 
+			startDate: d,
+			format: 'dd-mm-yyyy hh:ii'
+		});
 		LoadFunctions._listOrderOfOperation();
 		LoadFunctions._ListResponsibleOrderofOperations("cmb-responsable");
 		LoadFunctions._DistributionOrderList("cmb-OrdenOperacion");		
